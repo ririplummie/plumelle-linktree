@@ -2109,7 +2109,7 @@
 const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbza7O7Nh7ykUEdrQ9eLFZLNYPdZbxTVAfrflRFVynznEToP1LYaHK259NiPTdARpgt2/exec';
 const SHIPPING_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw1h3t0lIk3yDHkwI44vJn_h1Me8pnUHUyWGt3Q-cRMSuPfqHfDfikUUFX0DI1It-_m/exec';
 const INTERNATIONAL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxzMkJqN8jPklQLIMJQ-1wE6onHsdOJwwtq1hyDzJxrM6CKBxHzYLSaueDbKFW2Pz9G/exec';
-const GST_RATE = 0.03;
+const GST_RATE = 0.00;
 const UPI_ID = '8777413405@upi';
 
 function getUPIPaymentURL(amount) {
@@ -2767,7 +2767,7 @@ function buildBill() {
         <div class="bill-totals">
             <div class="row"><span>Subtotal</span><span id="billSubtotal">${symbol}${subtotal.toFixed(2)}</span></div>
             <div class="row"><span>Shipping</span><span id="billShipping">${shippingConverted > 0 ? symbol + shippingConverted.toFixed(2) : '—'}</span></div>
-            ${gstAmount > 0 ? `<div class="row"><span>GST (${(GST_RATE*100).toFixed(0)}%)</span><span>${symbol}${gstAmount.toFixed(2)}</span></div>` : ''}
+            
             <div class="row grand"><span>TOTAL</span><span id="billGrandTotal">${symbol}${total.toFixed(2)}</span></div>
         </div>
 	${isINR ? `
