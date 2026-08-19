@@ -2458,6 +2458,8 @@ function openProductZoom(imgSrc) {
 // ============================================================
 // SHIPPING CALCULATION
 // ============================================================
+// Replace the existing calculatePincodeShipping function with this:
+
 async function calculatePincodeShipping() {
     const input = document.getElementById('pincodeInput');
     const status = document.getElementById('pincodeStatus');
@@ -2485,7 +2487,6 @@ async function calculatePincodeShipping() {
     status.innerHTML = '⏳ Checking rates...';
 
     if (isINR) {
-        // INDIA SHIPPING - Shiprocket
         const orderValueINR = cart.reduce((sum, item) => sum + (getItemUnitPrice(item, 'INR') * (item.qty || 1)), 0);
 
         const formData = new FormData();
@@ -2504,6 +2505,9 @@ async function calculatePincodeShipping() {
                 pincodeEntered = false;
                 shippingCharge = 0;
                 shippingChargeINR = 0;
+                selectedCourier = null;
+                // CLEAR localStorage on error
+                localStorage.removeItem('plumelleSelectedCourier');
                 return;
             }
 
@@ -2515,10 +2519,23 @@ async function calculatePincodeShipping() {
 
             selectedCourier = result.courier || 'Standard';
             selectedEta = result.eta || '5-8 days';
-
             savedPincode = postalCode;
             pincodeEntered = true;
             shippingCurrency = 'INR';
+
+            // ✅ SAVE TO LOCALSTORAGE FOR CHECKOUT
+            const courierData = {
+                name: selectedCourier,
+                eta: selectedEta,
+                pincode: savedPincode,
+                savedAt: new Date().toISOString()
+            };
+            try {
+                localStorage.setItem('plumelleSelectedCourier', JSON.stringify(courierData));
+                console.log('✅ Courier saved to localStorage:', courierData);
+            } catch (error) {
+                console.warn('⚠️ Could not save courier:', error);
+            }
 
             status.className = 'shipping-status success';
             status.innerHTML = `✅ ${selectedCourier} | ₹${inrRate.toFixed(2)}<br>📦 ${selectedEta}`;
@@ -2530,6 +2547,8 @@ async function calculatePincodeShipping() {
             pincodeEntered = false;
             shippingCharge = 0;
             shippingChargeINR = 0;
+            selectedCourier = null;
+            localStorage.removeItem('plumelleSelectedCourier');
         }
         return;
     }
@@ -2542,6 +2561,8 @@ async function calculatePincodeShipping() {
         status.innerHTML = '❌ Shipping only for AUD, SGD, NZD, AED.';
         pincodeEntered = false;
         shippingCharge = 0;
+        selectedCourier = null;
+        localStorage.removeItem('plumelleSelectedCourier');
         return;
     }
 
@@ -2567,6 +2588,8 @@ async function calculatePincodeShipping() {
             pincodeEntered = false;
             shippingCharge = 0;
             shippingChargeINR = 0;
+            selectedCourier = null;
+            localStorage.removeItem('plumelleSelectedCourier');
             return;
         }
 
@@ -2583,10 +2606,23 @@ async function calculatePincodeShipping() {
 
         selectedCourier = result.courier || 'DHL / FedEx Priority';
         selectedEta = result.eta || '3-5 Business Days';
-
         savedPincode = postalCode;
         pincodeEntered = true;
         shippingCurrency = currentCurrency;
+
+        // ✅ SAVE TO LOCALSTORAGE FOR CHECKOUT
+        const courierData = {
+            name: selectedCourier,
+            eta: selectedEta,
+            pincode: savedPincode,
+            savedAt: new Date().toISOString()
+        };
+        try {
+            localStorage.setItem('plumelleSelectedCourier', JSON.stringify(courierData));
+            console.log('✅ Courier saved to localStorage:', courierData);
+        } catch (error) {
+            console.warn('⚠️ Could not save courier:', error);
+        }
 
         status.className = 'shipping-status success';
         status.innerHTML = `✅ ${selectedCourier} | ${formatPrice(rateInCustomerCurrency, currentCurrency)}<br>📦 ${selectedEta}`;
@@ -2598,9 +2634,10 @@ async function calculatePincodeShipping() {
         pincodeEntered = false;
         shippingCharge = 0;
         shippingChargeINR = 0;
+        selectedCourier = null;
+        localStorage.removeItem('plumelleSelectedCourier');
     }
 }
-
 // ============================================================
 // GENERATE DELIVERY DATE
 // ============================================================
@@ -3093,7 +3130,10 @@ function fallbackCopyUPI() {
 // ============================================================
 // PRINT BILL
 // ============================================================
+// Replace the existing printBill function with this:
+
 function printBill() {
+    // ✅ Check if courier is properly set
     if (!pincodeEntered || !(Number(shippingCharge) > 0) || !selectedCourier) {
         showToast('❌ Calculate shipping first.', false);
         return;
@@ -3108,7 +3148,7 @@ function printBill() {
     const content = document.getElementById('billInner');
     const clone = content.cloneNode(true);
 
-    // Print only the bill itself; no payment information or interactive controls.
+    // Print only the bill itself
     clone.querySelector('.bill-upi')?.remove();
     clone.querySelector('.bill-intl-message')?.remove();
     clone.querySelector('.bill-shipping')?.remove();
