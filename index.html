@@ -21,6 +21,13 @@
     <!-- html2canvas for image generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
+	.card .info .product-desc {
+    font-size: 9px;
+    color: #888;
+    line-height: 1.4;
+    margin-top: 6px;
+    /* REMOVED truncation - shows full text */
+}
 	/* =========================
    QUANTITY SELECTOR
 ========================= */
@@ -738,14 +745,15 @@
         .card .info {
             padding: 10px 12px 8px;
         }
-        .card .info .name {
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+.card .info .name {
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 2px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    min-height: 30px;
+}
         .card .info .price {
             color: var(--green);
             font-weight: 700;
@@ -2326,6 +2334,62 @@ const imageMap = {
     'PL050': 'PL050.PNG',
     'PL051': 'PL051.PNG'
 };
+// ============================================================
+// PRODUCT DESCRIPTIONS (PL051 → PL001)
+// ============================================================
+const productDescriptions = {
+    'PL051': 'A multi-strand layered beaded waist chain crafted with tiny multicolored beads. It highlights the midriff with layered texture, vibrant movement, and a bold bohemian statement. Perfect for resort wear, dance events, or beach outings. The reinforced clasp and chain extension ensure an adjustable, snug fit.',
+    'PL050': 'A colorful statement beaded body waist chain tailored for chic, trendy styling. Handcrafted with meticulously picked multicolored beads, it adds structural charm to traditional and Western outfits. The lightweight construction allows for comfortable all-day wear. Equipped with a sturdy metal lobster lock for reliable everyday fastening.',
+    'PL049': 'A sleek, minimal multi-color beaded waist chain designed for subtle yet vibrant accenting. Featuring a fine single strand of hand-strung rainbow beads, it offers a delicate shimmer against skin or clothing. It can be worn alone or layered, and includes tarnish-resistant metal fittings for long-lasting durability.',
+    'PL048': 'A Sakura pink statement beaded body waist chain tailored for chic, trendy styling. Handcrafted with meticulously picked pink beads, it adds structural charm to traditional and Western outfits. The lightweight construction allows for comfortable all-day wear. Equipped with a sturdy metal lobster lock for reliable everyday fastening.',
+    'PL047': 'A delicate pastel mint green beaded charm bracelet built for casual and semi-formal wear. Strung with smooth mint green glass beads, it provides a refreshing, cool aesthetic. It features subtle spacer beads, a delicate metal drop charm, and a flexible elastic core for easy slip-on convenience.',
+    'PL046': 'A lavender purple and pink macrame necklace crafted with thin, silky thread. This handcrafted piece is finished off with off-white beads and an antique golden pendant. Designed with delicate woven artistry, it provides an elegant, lightweight accent for your neckline.',
+    'PL045': 'A white macrame necklace inspired by unicorn tails and braids. This handcrafted woven neckpiece is finished off with chunky beads and soft lavender accents. It creates a playful, whimsical aesthetic that effortlessly stands out with everyday or themed outfits.',
+    'PL044': 'A chunky layered lavender macrame statement piece. It combines dramatic lavender macrame knots with natural earth-inspired beads to serve as a striking centerpiece for simple tops or dresses. Each element is securely linked together to ensure long-wearing structural integrity.',
+    'PL043': 'A lavender-toned beaded and macrame choker necklace with a distinct central keyhole charm detail. Handcrafted using soft lilac beads, this vintage-inspired choker offers a playful yet elegant aesthetic.',
+    'PL042': 'A pastel purple macrame waist belt made to accentuate fashion silhouettes. Built with multiple strands of lilac glass beads, this body jewelry sits gracefully around the waistline. It transforms simple dresses and cropped tops into styled, high-fashion outfits.',
+    'PL041': 'A vibrant charm necklace featuring funky charms and cherry beads. The charms are randomly arranged to offer a dramatic, retro-inspired aesthetic. Designed to bring a fun, energetic pop of personality, it serves as a lively statement piece for any casual look.',
+    'PL040': 'A premium glass beaded necklace and matching bracelet set. The necklace contours comfortably around the collarbone while the matching wristband completes the coordinated look. Fitted with reliable clasps to ensure secure, comfortable, and long-lasting everyday wear.',
+    'PL039': 'A contrast necklace with two bracelets with random charms ,featuring a bold, dramatic color combination. Strung with shiny, tightly woven beads on a strong Tigertail cord, it adds an edgy flair to casual or nighttime outfits. Includes an adjustable clasp closure for quick, customized, and secure fitting.',
+    'PL038': 'A beaded statement necklace highlighted with intricate charm detailing. Hand-strung with glossy beads and dangling metallic and bead charms, it brings texture, graceful movement, and a lively splash of energy to contemporary wear. Fitted with a sturdy clasp mechanism for secure placement.',
+    'PL037': 'A bold red beaded neckpiece featuring multiple handcrafted beaded charm drops along the strand comes with red crimson flowery earring and bracelet.Rich crimson beads are paired with decorative red beads and flowers for an artistic, handcrafted look. Perfect for monochromatic or fusion wear, it includes adjustable length options to suit different necklines.',
+    'PL036': 'A dual-tone beaded with decorative flower drop and dangle single earring designed for eye-catching color contrast. The dangling structure moves effortlessly with natural body motion to create lively visual interest. Outfitted with secure, nickel-free ear hooks for reliable and safe daily wear.',
+    'PL035': 'A dual-tone beaded drop and dangle single earring designed for eye-catching color contrast. The dangling structure moves effortlessly with natural body motion to create lively visual interest. Outfitted with secure, nickel-free ear hooks for reliable and safe daily wear.',
+    'PL034': 'A delicate fairycore jewelry set crafted for subtle everyday glamor. This lightweight set rests smoothly and comfortably against the skin for effortless styling. Completed with a sturdy clasp closure and an extender chain for seamless, custom adjustability. complete with earrings.',
+    'PL033': 'An ocean blue beaded anklet and foot jewelry piece featuring delicate drop charms. Handcrafted with vibrant turquoise, sea themed random charms and white beads, it brings a relaxed, beach-ready vibe to your footwear. Built on a strong cord with an adjustable clasp for a perfect ankle fit.',
+    'PL032': 'Elegant handcrafted red and golden drop earrings tailored for festive or casual accenting. The structured arrangement of warm red beads, red flower green leaves paired with polished gold tones provides a refined finish. Carefully designed to remain lightweight and comfortable during extended wear.',
+    'PL031': 'Bright multi-colored beaded dangling earrings with bright red and turquoise beads and silver caps that infuse fun and energy into any wardrobe. Hand-woven with a kaleidoscope of colorful beads, their elongated design draws attention while remaining lightweight on the earlobes. Crafted with hypoallergenic ear hooks for safe, easy wearing.',
+    'PL030': 'Pastel fairycore earrings designed specifically to complement and match the Crown Set (PL001). Featuring delicate pastel tones and an ethereal aesthetic, these earrings provide a graceful, coordinated finish to complete your fairycore-inspired jewelry look.',
+    'PL029': 'Included: 1 necklace, 1 bracelet, a pair of earrings. A soft pink, lavender, and blue beaded choker necklace centred with a delicate raspberry pendant. Hand-strung with muted pastels, this romantic necklace pairs beautifully with modern and boho styles. Outfitted with an adjustable clasp chain for flexible length options.',
+    'PL028': 'A pastel beaded necklace accompanied by a matching bracelet and earrings set. Featuring a sweet blend of powder pink and soft mint green beads, this coordinated set delivers a soft, charming aesthetic. Built with reliable clasps for versatile and durable wear.',
+    'PL027': 'Handcrafted red beaded drop earrings designed for high visual impact. These dangling earrings catch the light beautifully with every movement. They are carefully crafted to remain lightweight and comfortable on the ear for extended wear.',
+    'PL026': 'A matching ruby red and sea blue beaded earrings and bracelet set. Designed with a striking color contrast, this coordinated pair provides a complete, polished, and classic accessory look that effortlessly complements both casual and dressy outfits.',
+    'PL025': 'An ocean blue and aqua beaded stackable wrist bracelet , earrings and necklace set capturing cool coastal vibes. Hand-assembled with an assortment of turquoise, navy, and sky-blue beads, and finished with random charm accents for layered, beach-inspired styling.',
+    'PL024': 'A matching ruby red and sea blue beaded necklace, earrings, and wrist bracelet set. Strung with vibrant beads and finished with random charms, this coordinated three-piece jewelry set delivers a complete, classic, and polished accessory option.',
+    'PL023': 'Handcrafted mint green beaded leafy wrist bracelets built for effortless wrist styling. Featuring delicate leaf-inspired bead craftsmanship in a soft mint tone, this piece offers a fresh, nature-inspired accent suitable for everyday wear.',
+    'PL022': 'An azure blue and sea green beaded leafy bracelet featuring vibrant blue bead craftsmanship. Designed with detailed leaf-inspired elements, this bracelet delivers a rich splash of ocean-inspired color to elevate your everyday wrist stack.',
+    'PL021': 'A colorful beaded leafy bracelet featuring vibrant bead craftsmanship. Detailed with leaf-shaped beads in rich, lively tones, this handcrafted piece adds an artistic, nature-inspired flourish to any casual or bohemian outfit.',
+    'PL020': 'A rich green leaf beaded wrist bracelet set combined with charming red leaf beads. Featuring nature-inspired leaf detailing in contrasting tones, this set provides a vibrant, earthy accessory for layered or standalone styling.',
+    'PL019': 'Colorful rainbow funky bead bracelets styled with unique, funky accents. Strung with an array of bright, multicolored beads, this playful wrist piece adds a lively, cheerful pop of retro personality to your daily wardrobe.',
+    'PL018': 'A vibrant turquoise blue beaded bracelet set framed with spotted dinosaur beads. Combining bold ocean-blue tones with playful patterned accents, this unique bracelet set offers a fun, eye-catching addition to casual jewelry collections.',
+    'PL017': 'A soft lavender purple beaded wrist bracelet designed for delicate, everyday styling. The smooth, lilac-hued glass beads offer a soothing color tone that coordinates effortlessly with modern and casual fashion silhouettes.',
+    'PL016': 'Layered green and mint beaded wrist bracelets blending deep forest tones with soft pastel hues. Hand-strung with high-sheen beads, this stack provides a balanced, eye-catching contrast of rich and light colors for effortless styling.',
+    'PL015': 'A soft lilac beaded wrist bracelet designed for delicate, everyday styling. The smooth, lilac-hued glass beads offer a calming, subtle color tone that pairs effortlessly with modern and minimalist wardrobes.',
+    'PL014': 'A dark-themed gothic black beaded bracelet set made for edgy statement styling. Featuring a set of two to three pieces with deep black beads, this stack adds a bold, alternative accent to casual or nighttime looks.',
+    'PL013':  'Sand marble beaded wrist bracelet with wrapped wires. Unisex.',
+    'PL012': 'A sparkling blue leaf bracelet. Made with combinations of blue leaf beads and vibrant blue bead craftsmanship, this leafy bracelet delivers a shimmering, nature-inspired touch to your wrist.',
+    'PL011': 'A red beaded leafy bracelet featuring vibrant blue bead craftsmanship. The contrasting beadwork and leaf-inspired accents come together to create an artistic, nature-themed statement piece for everyday wear.',
+    'PL010': 'A mint green cat\'s eye beaded bracelet set. Crafted with smooth cat\'s eye beads in soft mint tones, this bracelet stack provides a subtle, luminous sheen and a refreshing pastel touch for daily accessorizing.',
+    'PL009': 'A single assorted glass bead bracelet featuring random beads. Hand-assembled with colorful glass elements, this versatile wrist accessory offers a playful, one-of-a-kind pop of color for simple standalone or layered wear.',
+    'PL008': 'Oversized flower earrings featuring very delicate floral detailing. Designed to create a bold, romantic statement, these decorative earrings bring artistic texture and graceful charm to festive, dressy, or casual looks.',
+    'PL007': 'A pair of two green glass bead bracelets featuring delicate leaf detailing. Handcrafted with smooth green beads, this two-piece set brings a fresh, nature-inspired aesthetic to your everyday accessory collection.',
+    'PL006': 'Included: a necklace, 2 bracelets and a pair of earrings. A handcrafted black and red beaded gothic statement necklace featuring bold, dramatic drop designs. Hand-assembled with matte and glossy black beads paired with deep ruby and purple accents for a classic, alternative aesthetic.',
+    'PL005': 'A bright yellow and green beaded stackable wrist bracelet set full of cheerful energy. Featuring sunny yellow beads mixed with fresh leafy green accents, this stack brings a refreshing, nature-inspired pop of color.',
+    'PL004': 'A light mint blue beaded wrapped bracelet crafted for subtle, elegant wrist adornment. The smooth pastel beads give off a calming, cool aesthetic perfectly suited for spring and summer fashion.',
+    'PL003': 'A shimmering aqua blue beaded wrist bracelet set designed to catch the light with subtle brilliance. Crafted with glossy ocean-blue glass beads, this piece brings a playful, fresh, and coastal feel to casual clothing.',
+    'PL002': 'A set of flower bracelets featuring very delicate floral detailing. Designed with subtle charm, these wrist accessories bring a gentle, nature-inspired touch that pairs beautifully with everyday and feminine styles.',
+    'PL001': 'A handcrafted multi-strand pastel pink, coral red and sky blue beaded necklace paired with a matching bracelet. Inspired by royal floral motifs, this statement set features bold color blocking, a dramatic draped fit, and secure clasp hardware.'
+};
 
 function getProductImage(p) {
     if (p.img && (p.img.startsWith('http://') || p.img.startsWith('https://') || p.img.includes('/'))) {
@@ -2346,6 +2410,7 @@ function renderCatalogue() {
         const inCart = qty > 0;
         const displayPrice = formatPrice(getItemUnitPrice(p, currentCurrency), currentCurrency);
         const resolvedImg = getProductImage(p);
+        const description = productDescriptions[p.id] || 'Handcrafted jewellery piece from PLUMELLE.';
 
         return `
         <div class="card ${inCart ? 'in-cart' : ''}" data-id="${p.id}">
@@ -2363,6 +2428,8 @@ function renderCatalogue() {
                 <p class="price">${displayPrice}</p>
                 <p class="id">${p.id}</p>
                 <span class="category-tag">${p.category}</span>
+                <!-- PRODUCT DESCRIPTION -->
+                <p class="product-desc">${description}</p>
             </div>
 
             ${!inStock ? `
