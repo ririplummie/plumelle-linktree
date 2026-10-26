@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@300;400;500&display=swap"
           rel="stylesheet">
 
     <!-- html2pdf for PDF generation -->
@@ -1530,6 +1530,268 @@
         height:auto;  /* Keep portrait on mobile too */
     }
 }
+
+        /* =========================================================
+           LUXURY STOREFRONT (Chanel-inspired: monochrome, serif, hairlines)
+        ========================================================= */
+        .catalogue-section {
+            --lx-ink: #0b0b0b;
+            --lx-mute: #77736c;
+            --lx-line: #e5e2db;
+            background: #fff;
+            color: var(--lx-ink);
+            width: 100vw;
+            margin: 64px 0 0 calc(-50vw + 50%);
+            padding: 76px max(22px, calc((100vw - 1180px) / 2)) 88px;
+            border-top: 0;
+            font-family: "Jost", "DM Sans", sans-serif;
+        }
+        .catalogue-section .catalogue-header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 14px;
+            margin-bottom: 54px;
+        }
+        .catalogue-section .catalogue-header h2 {
+            font-family: "Bodoni Moda", "Didot", "Times New Roman", serif;
+            font-weight: 400;
+            font-size: clamp(26px, 5vw, 42px);
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: #000;
+            padding-left: .24em;
+        }
+        .catalogue-section .catalogue-header h2 span { color: inherit; }
+        .lx-eyebrow {
+            font-size: 10px;
+            letter-spacing: .38em;
+            text-transform: uppercase;
+            color: var(--lx-mute);
+            padding-left: .38em;
+        }
+        .lx-rule { width: 44px; height: 1px; background: #000; margin: 8px auto 12px; }
+
+        .catalogue-section .catalogue-controls {
+            justify-content: center;
+            gap: 26px;
+            padding-top: 18px;
+            border-top: 1px solid var(--lx-line);
+            width: 100%;
+        }
+        .catalogue-section .catalogue-controls select {
+            background: transparent;
+            color: #000;
+            border: 0;
+            border-bottom: 1px solid #000;
+            border-radius: 0;
+            padding: 6px 4px;
+            font-family: "Jost", sans-serif;
+            font-size: 11px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+        }
+        .catalogue-section .catalogue-controls select option { background: #fff; color: #000; }
+        .catalogue-section .catalogue-controls select:focus { border-color: #000; }
+        .catalogue-section .cart-summary {
+            background: transparent;
+            border: 0;
+            padding: 0;
+            gap: 10px;
+            font-size: 11px;
+            letter-spacing: .14em;
+        }
+        .catalogue-section .cart-summary .count {
+            background: #000;
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            font-weight: 500;
+            font-size: 10px;
+        }
+        .catalogue-section .cart-summary .total { color: #000; font-weight: 500; }
+        .catalogue-section .generate-bill-btn {
+            background: #000;
+            color: #fff;
+            border: 1px solid #000;
+            border-radius: 0;
+            padding: 11px 26px;
+            font-family: "Jost", sans-serif;
+            font-weight: 500;
+            font-size: 10px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            transform: none;
+        }
+        .catalogue-section .generate-bill-btn:hover { background: #fff; color: #000; box-shadow: none; transform: none; }
+        .catalogue-section .generate-bill-btn:disabled { background: #efede8; color: #aaa59c; border-color: #efede8; }
+
+        /* Grid */
+        .catalogue-section .catalogue-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 52px 16px;
+        }
+        @media (min-width: 720px)  { .catalogue-section .catalogue-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 68px 30px; } }
+        @media (min-width: 1100px) { .catalogue-section .catalogue-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 76px 34px; } }
+
+        /* Product */
+        .catalogue-section .card {
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .catalogue-section .card:hover,
+        .catalogue-section .card.in-cart { transform: none; border: 0; box-shadow: none; background: transparent; }
+        .catalogue-section .card .check-badge,
+        .catalogue-section .card .qty-badge { display: none; }
+        .catalogue-section .card .status-badge {
+            top: 10px; left: 10px;
+            background: #fff;
+            color: #000;
+            border-radius: 0;
+            padding: 6px 10px;
+            font-family: "Jost", sans-serif;
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: .26em;
+        }
+        .catalogue-section .card .status-badge.out-of-stock,
+        .catalogue-section .card.in-cart .status-badge { background: #000; color: #fff; }
+
+        .catalogue-section .card .thumb {
+            aspect-ratio: 4 / 5;
+            height: auto;
+            background: #f4f2ee;
+        }
+        .catalogue-section .card .thumb img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
+        }
+        .catalogue-section .card:hover .thumb .default-img { opacity: 1; transform: scale(1.045); }
+
+        .catalogue-section .card .info {
+            flex: 1;
+            padding: 22px 6px 0;
+            text-align: center;
+        }
+        .catalogue-section .card .info .category-tag {
+            display: block;
+            background: none;
+            padding: 0;
+            margin: 0 0 9px;
+            border-radius: 0;
+            font-size: 9px;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+            color: var(--lx-mute);
+        }
+        .catalogue-section .card .info .name {
+            min-height: 0;
+            margin: 0 0 8px;
+            font-family: "Bodoni Moda", "Didot", serif;
+            font-weight: 400;
+            font-size: 17px;
+            letter-spacing: .03em;
+            line-height: 1.3;
+            color: #000;
+        }
+        .catalogue-section .card .info .price {
+            color: #000;
+            font-weight: 400;
+            font-size: 13px;
+            letter-spacing: .12em;
+        }
+        .catalogue-section .card .info .product-desc {
+            font-size: 11px;
+            line-height: 1.75;
+            color: var(--lx-mute);
+            margin-top: 14px;
+        }
+        .catalogue-section .card .info .id {
+            margin-top: 12px;
+            font-size: 8px;
+            letter-spacing: .3em;
+            color: #b5b0a6;
+        }
+
+        .catalogue-section .card .toggle-btn {
+            width: 100%;
+            margin: 20px 0 0;
+            padding: 14px 0;
+            border: 1px solid #000;
+            border-radius: 0;
+            background: #000;
+            color: #fff;
+            font-family: "Jost", sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .3em;
+        }
+        .catalogue-section .card .toggle-btn:hover { background: #fff; color: #000; border-color: #000; }
+        .catalogue-section .card .toggle-btn.out-of-stock,
+        .catalogue-section .card .toggle-btn.out-of-stock:hover {
+            background: transparent; color: #a19c92; border-color: var(--lx-line); opacity: 1;
+        }
+        .catalogue-section .qty-controller {
+            margin: 20px 0 0;
+            height: 44px;
+            background: #fff;
+            border: 1px solid #000;
+            border-radius: 0;
+        }
+        .catalogue-section .qty-btn { color: #000; width: 44px; font-size: 15px; font-weight: 400; }
+        .catalogue-section .qty-btn:hover { background: #000; color: #fff; }
+        .catalogue-section .qty-count { font-family: "Jost", sans-serif; font-weight: 500; font-size: 12px; color: #000; letter-spacing: .1em; }
+
+        /* Loader + empty state (light) */
+        .catalogue-section .catalogue-loader { padding: 90px 20px; }
+        .catalogue-section .funky-spinner { width: 44px; height: 44px; }
+        .catalogue-section .funky-spinner .spin-ring {
+            border: 1px solid #ddd9d1; border-top-color: #000; box-shadow: none;
+            animation: funkyReverse 1s linear infinite;
+        }
+        .catalogue-section .funky-spinner .spin-core { display: none; }
+        .catalogue-section .funky-spinner .spin-icon { color: #000; font-size: 10px; animation: none; text-shadow: none; }
+        .catalogue-section .loader-text {
+            font-family: "Jost", sans-serif; font-weight: 400; font-size: 10px; letter-spacing: .38em; color: #000;
+        }
+        .catalogue-section .loader-text span { color: #000; }
+        .lx-empty {
+            grid-column: 1 / -1; text-align: center; padding: 80px 20px;
+            font-family: "Bodoni Moda", serif; font-size: 18px; letter-spacing: .08em; color: #000;
+        }
+
+        /* Footer + Terms button */
+        footer .mini-logo {
+            font-family: "Bodoni Moda", "Didot", serif;
+            font-weight: 400;
+            font-size: 22px;
+            letter-spacing: .5em;
+            padding-left: .5em;
+            margin-bottom: 22px;
+        }
+        .policy-btn {
+            display: inline-block;
+            margin: 0 0 26px;
+            padding: 14px 34px;
+            border: 1px solid rgba(255,255,255,.7);
+            color: #fff;
+            text-decoration: none;
+            font-family: "Jost", sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            transition: .3s;
+        }
+        .policy-btn:hover { background: #fff; color: #000; }
     </style>
 </head>
 
@@ -1891,7 +2153,9 @@
     <section class="catalogue-section" id="catalogue">
 
         <div class="catalogue-header">
-            <h2>✦ <span>CATALOGUE</span></h2>
+            <p class="lx-eyebrow">Plumelle · Handcrafted Jewellery</p>
+            <h2><span>The Collection</span></h2>
+            <div class="lx-rule"></div>
             <div class="catalogue-controls">
                 <select id="currencySelector">
                     <option value="INR">₹ INR</option>
@@ -1911,10 +2175,6 @@
             </div>
         </div>
 
-        <p style="color:#666;font-size:12px;margin-bottom:16px;">
-            <i class="fa fa-hand-pointer"></i> Click the toggle button below each product to add/remove from cart
-        </p>
-
        <div class="catalogue-grid" id="catalogueGrid">
     <div class="catalogue-loader">
         <div class="funky-spinner">
@@ -1923,7 +2183,7 @@
             <div class="spin-icon">✦</div>
         </div>
         <div class="loader-text">
-            FETCHING THE GOODS<span>...</span>
+            LOADING THE COLLECTION<span>...</span>
         </div>
     </div>
 </div>
@@ -2103,6 +2363,9 @@
             PLUMELLE
         </div>
 
+        <a class="policy-btn" href="term.html">Terms &amp; Policies</a>
+<br>
+
         MADE WITH <span class="heart">♥</span>
 
     </footer>
@@ -2175,7 +2438,7 @@ function showCatalogueLoader() {
                 <div class="spin-icon">✦</div>
             </div>
             <div class="loader-text">
-                FETCHING THE GOODS<span>...</span>
+                LOADING THE COLLECTION<span>...</span>
             </div>
         </div>
     `;
@@ -2412,6 +2675,12 @@ function renderCatalogue() {
     const grid = document.getElementById('catalogueGrid');
     if (!grid) return;
 
+    if (productData.length === 0) {
+        grid.innerHTML = '<p class="lx-empty">The collection is being curated. Please check back soon.</p>';
+        updateCartSummary();
+        return;
+    }
+
     const reversedProducts = [...productData].reverse();
 
     grid.innerHTML = reversedProducts.map(p => {
@@ -2422,29 +2691,26 @@ function renderCatalogue() {
         const displayPrice = formatPrice(getItemUnitPrice(p, currentCurrency), currentCurrency);
         const resolvedImg = getProductImage(p);
         const description = productDescriptions[p.id] || 'Handcrafted jewellery piece from PLUMELLE.';
+        const badge = !inStock
+            ? '<div class="status-badge out-of-stock">Sold Out</div>'
+            : (inCart ? '<div class="status-badge">Added</div>' : '');
 
         return `
         <div class="card ${inCart ? 'in-cart' : ''}" data-id="${p.id}">
-            <div class="check-badge"><i class="fa fa-check"></i></div>
-            ${qty > 0 ? `<div class="qty-badge">×${qty}</div>` : ''}
-            <div class="status-badge ${inStock ? '' : 'out-of-stock'}">
-                ${inStock ? (inCart ? 'ADDED' : '') : 'SOLD OUT'}
-            </div>
+            ${badge}
             <div class="thumb" onclick="openProductZoom('${resolvedImg}')">
-                <img class="default-img" src="${resolvedImg}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23111%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-family=%22sans-serif%22 font-size=%2214%22%3ENo Image%3C/text%3E%3C/svg%3E'">
-                <img class="zoom-img" src="${resolvedImg}" alt="${p.name}" onerror="this.style.display='none'">
+                <img class="default-img" src="${resolvedImg}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;removeProductCard('${p.id}')">
             </div>
             <div class="info">
+                <span class="category-tag">${p.category}</span>
                 <p class="name">${p.name}</p>
                 <p class="price">${displayPrice}</p>
-                <p class="id">${p.id}</p>
-                <span class="category-tag">${p.category}</span>
-                <!-- PRODUCT DESCRIPTION -->
                 <p class="product-desc">${description}</p>
+                <p class="id">${p.id}</p>
             </div>
 
             ${!inStock ? `
-                <button class="toggle-btn out-of-stock" disabled>SOLD OUT</button>
+                <button class="toggle-btn out-of-stock" disabled>Sold Out</button>
             ` : inCart ? `
                 <div class="qty-controller">
                     <button class="qty-btn" onclick="updateQty('${p.id}', -1)">−</button>
@@ -2452,12 +2718,51 @@ function renderCatalogue() {
                     <button class="qty-btn" onclick="updateQty('${p.id}', 1)">+</button>
                 </div>
             ` : `
-                <button class="toggle-btn" onclick="updateQty('${p.id}', 1)">+ ADD TO CART</button>
+                <button class="toggle-btn" onclick="updateQty('${p.id}', 1)">Add to Cart</button>
             `}
         </div>`;
     }).join('');
 
     updateCartSummary();
+}
+
+// ============================================================
+// REMOVE PRODUCTS WHOSE IMAGE IS MISSING
+// ============================================================
+function checkImage(src, timeoutMs = 10000) {
+    return new Promise(resolve => {
+        if (!src) { resolve(false); return; }
+        const img = new Image();
+        let done = false;
+        const finish = ok => { if (!done) { done = true; clearTimeout(timer); resolve(ok); } };
+        // A slow network is not a missing image: on timeout keep the product.
+        // (The card's own onerror will still remove it if it later fails.)
+        const timer = setTimeout(() => finish(true), timeoutMs);
+        img.onload = () => finish(true);
+        img.onerror = () => finish(false);
+        img.src = src;
+    });
+}
+
+async function removeProductsWithoutImages() {
+    const results = await Promise.all(productData.map(p => checkImage(getProductImage(p))));
+    const removed = productData.filter((_, i) => !results[i]).map(p => p.id);
+    if (removed.length) {
+        console.warn('Removed products with missing images:', removed);
+        productData = productData.filter(p => !removed.includes(p.id));
+        cart = cart.filter(item => !removed.includes(item.id));
+    }
+}
+
+// Fallback: if an <img> fails after render, drop that product too
+function removeProductCard(id) {
+    productData = productData.filter(p => p.id !== id);
+    const cartBefore = cart.length;
+    cart = cart.filter(item => item.id !== id);
+    const card = document.querySelector('#catalogueGrid .card[data-id="' + id + '"]');
+    if (card) card.remove();
+    if (!document.querySelector('#catalogueGrid .card')) renderCatalogue();
+    else if (cart.length !== cartBefore) updateCartSummary();
 }
 
 // ============================================================
@@ -3367,6 +3672,7 @@ document.addEventListener('keydown', function(e) {
 // ============================================================
 async function init() {
     await fetchAllData();
+    await removeProductsWithoutImages();
     renderCatalogue();
     console.log('✅ PLUMELLE ready!');
 }

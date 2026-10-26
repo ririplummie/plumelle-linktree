@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Policies — PLUMELLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505; --ivory:#f5f5f0; --mute:#8d8a84; --line:rgba(255,255,255,.14);
+  --serif:"Bodoni Moda","Didot","Times New Roman",serif; --sans:"Jost","DM Sans",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+
+/* marquee */
+.marquee{overflow:hidden;white-space:nowrap;border-bottom:1px solid var(--line)}
+.marquee-track{display:inline-block;padding:10px 0;animation:marquee 26s linear infinite;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--mute)}
+.marquee-track span{margin-right:44px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:30px 0 0}
+.logo{font-family:var(--serif);font-size:20px;letter-spacing:.5em;text-decoration:none;color:var(--ivory)}
+.back{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ivory);text-decoration:none;border-bottom:1px solid var(--ivory);padding-bottom:3px}
+.back:hover{opacity:.6}
+
+.hero{text-align:center;padding:76px 0 48px}
+.eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--mute);padding-left:.4em}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,6vw,58px);letter-spacing:.2em;text-transform:uppercase;padding-left:.2em;margin:14px 0 6px}
+.hero p{max-width:520px;margin:18px auto 0;color:#bdbab3;font-size:15px}
+.rule{width:44px;height:1px;background:var(--ivory);margin:26px auto 0}
+
+/* tabs */
+.tabs{display:flex;justify-content:center;gap:clamp(14px,4vw,46px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:wrap;position:sticky;top:0;background:rgba(5,5,5,.92);backdrop-filter:blur(8px);z-index:10}
+.tab{background:none;border:0;color:var(--mute);font-family:var(--sans);font-size:11px;letter-spacing:.28em;text-transform:uppercase;padding:20px 4px;cursor:pointer;position:relative;transition:color .3s}
+.tab:hover{color:var(--ivory)}
+.tab[aria-selected="true"]{color:var(--ivory)}
+.tab[aria-selected="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ivory)}
+
+.panel{display:none;padding:56px 0 20px;animation:fade .5s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.panel-head{text-align:center;margin-bottom:38px}
+.panel-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(22px,4vw,32px);letter-spacing:.12em}
+.panel-head p{color:var(--mute);font-size:13px;margin-top:8px}
+
+.glance{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:44px}
+@media(min-width:760px){.glance{grid-template-columns:repeat(4,1fr)}}
+.glance div{background:var(--black);padding:22px 12px;text-align:center}
+.glance b{display:block;font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:.04em}
+.glance span{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+
+.grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+.item{background:var(--black);padding:34px 30px 36px;position:relative}
+.item .n{font-family:var(--serif);font-size:13px;letter-spacing:.2em;color:var(--mute)}
+.item h3{font-family:var(--serif);font-weight:400;font-size:21px;letter-spacing:.03em;margin:8px 0 10px}
+.item p{font-size:14px;color:#c9c6bf}
+.item p b{font-weight:500;color:var(--ivory)}
+.item.wide{grid-column:1/-1}
+
+.contact{text-align:center;padding:84px 0 20px}
+.contact h4{font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:.1em}
+.contact p{color:var(--mute);font-size:13px;margin:8px 0 26px}
+.btn{display:inline-block;padding:14px 34px;border:1px solid rgba(255,255,255,.7);color:var(--ivory);text-decoration:none;font-size:10px;font-weight:500;letter-spacing:.3em;text-transform:uppercase;transition:.3s}
+.btn:hover{background:var(--ivory);color:var(--black)}
+
+footer{text-align:center;margin-top:70px;padding:34px 0 46px;border-top:1px solid var(--line);color:#777;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+footer .mini{font-family:var(--serif);font-size:20px;letter-spacing:.5em;color:var(--ivory);margin-bottom:10px;padding-left:.5em;text-transform:none}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<div class="marquee"><div class="marquee-track">
+  <span>Handmade to order</span><span>Ships worldwide</span><span>Fully prepaid</span><span>All sales final</span><span>Made with care</span>
+  <span>Handmade to order</span><span>Ships worldwide</span><span>Fully prepaid</span><span>All sales final</span><span>Made with care</span>
+</div></div>
+
+<div class="wrap">
+  <div class="top">
+    <a class="logo" href="index.html">PLUMELLE</a>
+    <a class="back" href="index.html">← Back to shop</a>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">The fine print, made friendly</p>
+    <h1>Terms &amp; Policies</h1>
+    <div class="rule"></div>
+    <p>Everything we make is handmade, so a few house rules keep things smooth for both of us. Short version below — nothing hidden.</p>
+  </header>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Policies">
+  <button class="tab" role="tab" data-tab="shipping" aria-selected="true">Shipping &amp; Returns</button>
+  <button class="tab" role="tab" data-tab="privacy" aria-selected="false">Privacy</button>
+  <button class="tab" role="tab" data-tab="terms" aria-selected="false">Terms</button>
+</nav>
+
+<main class="wrap">
+
+<!-- SHIPPING -->
+<section class="panel active" id="shipping" role="tabpanel">
+  <div class="panel-head"><h2>Shipping &amp; Returns</h2><p>How your piece gets made, moved and (if needed) made right.</p></div>
+
+  <div class="glance">
+    <div><b>≤ 30 days</b><span>To make</span></div>
+    <div><b>100%</b><span>Prepaid</span></div>
+    <div><b>Final</b><span>Sale</span></div>
+    <div><b>Credit</b><span>Not cash</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="item"><span class="n">01</span><h3>Made just for you</h3><p>Every piece is handmade to order. Please allow <b>up to 30 days</b> for production (macramé is usually quicker, up to 20). Busy seasons can stretch this a little.</p></div>
+    <div class="item"><span class="n">02</span><h3>On its way</h3><p>A courier partner carries your parcel. Delivery dates are honest estimates — weather, holidays and customs can nudge them. Once it leaves our hands, transit delays sit with the courier.</p></div>
+    <div class="item"><span class="n">03</span><h3>Pay first, then we begin</h3><p>We're a small studio, so orders are <b>100% prepaid by bank transfer</b>. No cash on delivery. Your order starts once your payment is confirmed.</p></div>
+    <div class="item"><span class="n">04</span><h3>All sales are final</h3><p>Because each piece is made for you, we can't cancel, exchange or take back an order for a change of mind. Unsure? Email us first — we'll happily send more photos or videos.</p></div>
+    <div class="item"><span class="n">05</span><h3>If something isn't right</h3><p>Damaged or wrong piece? Send <b>one unedited unboxing video within 24 hours</b> of delivery: sealed parcel, label, opening, the item. Damaged pieces get a free repair; wrong pieces get store credit once we've checked the return. You cover return shipping, plus a ₹500 handling &amp; inspection fee. International orders aren't eligible for repair.</p></div>
+    <div class="item"><span class="n">06</span><h3>Lost in transit?</h3><p>A late or stuck tracking page doesn't mean lost. We'll open a courier investigation, and if the loss is confirmed you'll get <b>store credit</b> for the product value (not shipping or taxes). No cash refunds or replacement shipments. Please keep all packaging until a claim is closed.</p></div>
+    <div class="item"><span class="n">07</span><h3>Refused or returned parcels</h3><p>If a parcel comes back because of a wrong address, a refusal or missed deliveries, there's no refund and re-sending is at your cost. Double-check your address and phone number!</p></div>
+    <div class="item"><span class="n">08</span><h3>Duties &amp; customs</h3><p>Within India, taxes are already in the price. For international orders, duties and import charges follow what's shown at checkout.</p></div>
+    <div class="item"><span class="n">09</span><h3>About store credit</h3><p>Only valid on our website, and can't be swapped for cash.</p></div>
+    <div class="item"><span class="n">10</span><h3>Care &amp; skin</h3><p>Keep pieces away from water, perfume, lotion and sunlight, and take them off to bathe, swim, work out or sleep. Small variations in beads, knots and finish are part of handmade charm, not defects. We can't promise nickel-free, so take care if your skin is sensitive. Small parts — keep away from children and pets.</p></div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="panel" id="privacy" role="tabpanel">
+  <div class="panel-head"><h2>Privacy</h2><p>What we keep, why we keep it, and who sees it.</p></div>
+  <div class="grid">
+    <div class="item"><span class="n">01</span><h3>What we collect</h3><p>Your name, email, phone, delivery &amp; billing address, order and customisation details, plus light, anonymous site analytics (clicks, carts, purchases, a random session ID). We don't intentionally collect IP addresses.</p></div>
+    <div class="item"><span class="n">02</span><h3>Why</h3><p>To make and ship your order, answer your messages, and make the shop better. That's it.</p></div>
+    <div class="item"><span class="n">03</span><h3>Who sees it</h3><p>Our courier, payment partners (Wise and Xflow Pay for international transfers) and Supabase, which hosts accounts. They only get what they need. <b>We never sell or rent your data.</b></p></div>
+    <div class="item"><span class="n">04</span><h3>Payments</h3><p>We never store your passwords or full card or bank credentials — and please don't email them to us.</p></div>
+    <div class="item"><span class="n">05</span><h3>Marketing</h3><p>Only if you opt in. Unsubscribe any time; ordering never depends on it.</p></div>
+    <div class="item"><span class="n">06</span><h3>Cookies</h3><p>Just the basics, for your cart, preferences and simple analytics. You can block them in your browser, but your cart may stop working.</p></div>
+    <div class="item"><span class="n">07</span><h3>Adults only</h3><p>Our shop is for people 18 and over. Under 18? Please ask a parent or guardian to order for you.</p></div>
+    <div class="item"><span class="n">08</span><h3>Your rights</h3><p>Ask to see, fix or delete your data, or withdraw consent, any time at <b>relations@plumelleatellie.com</b>. We keep only what the law or our records require.</p></div>
+    <div class="item wide"><span class="n">09</span><h3>Staying safe</h3><p>We take reasonable steps to protect your information, though no website can promise perfect security.</p></div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section class="panel" id="terms" role="tabpanel">
+  <div class="panel-head"><h2>Terms</h2><p>The ground rules for shopping with us.</p></div>
+  <div class="grid">
+    <div class="item"><span class="n">01</span><h3>18 and over</h3><p>By using the shop you confirm you're at least 18 years old.</p></div>
+    <div class="item"><span class="n">02</span><h3>Prices &amp; offers</h3><p>Prices can change, but confirmed orders keep the price you paid. Promotions may be changed or withdrawn.</p></div>
+    <div class="item"><span class="n">03</span><h3>When an order is official</h3><p>Placing an order is a request. It's accepted once we've verified your payment and confirmed. If we can't fulfil an order you've paid for, you'll be refunded.</p></div>
+    <div class="item"><span class="n">04</span><h3>Custom pieces</h3><p>Please double-check size, colour and specifications. Once we've received a custom order, it can't be changed.</p></div>
+    <div class="item"><span class="n">05</span><h3>Your account</h3><p>Keep your login safe and tell us if something looks off. We may pause an account for security or misuse.</p></div>
+    <div class="item"><span class="n">06</span><h3>Handmade &amp; photos</h3><p>Screens and lighting vary, and handmade means small differences in colour, texture and size. That's normal.</p></div>
+    <div class="item"><span class="n">07</span><h3>Our designs are ours</h3><p>Please don't copy, repost or resell our content. Pieces are for personal use, not resale under another brand.</p></div>
+    <div class="item"><span class="n">08</span><h3>Reviews</h3><p>Be honest and kind. Your words stay yours; you let us display them. We may remove anything unlawful or abusive.</p></div>
+    <div class="item"><span class="n">09</span><h3>Fair play</h3><p>No fraud, spam, scraping or hacking. We may refuse or cancel orders involving fraud, abuse, pricing errors, or anything we can't reasonably fulfil.</p></div>
+    <div class="item"><span class="n">10</span><h3>Liability</h3><p>The site is provided as available, with no promise it's always error-free. We're not responsible for damage from misuse, accidents or normal wear.</p></div>
+  </div>
+</section>
+
+<div class="contact">
+  <h4>Still have questions?</h4>
+  <p>Last updated 2 October 2026</p>
+  <a class="btn" href="mailto:relations@plumelleatellie.com">Write to us</a>
+</div>
+</main>
+
+<footer>
+  <div class="mini">PLUMELLE</div>
+  Made with ♥
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  function show(id,push){
+    if(!document.getElementById(id)) id='shipping';
+    tabs.forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.tab===id))});
+    panels.forEach(function(p){p.classList.toggle('active',p.id===id)});
+    if(push) history.replaceState(null,'','#'+id);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    show(t.dataset.tab,true);
+    var top=document.querySelector('.tabs').offsetTop;
+    if(window.scrollY>top) window.scrollTo({top:top,behavior:'smooth'});
+  })});
+  show((location.hash||'#shipping').slice(1),false);
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1),false)});
+})();
+</script>
+</body>
+</html>
