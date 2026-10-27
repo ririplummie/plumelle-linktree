@@ -1659,8 +1659,12 @@
             font-weight: 500;
             letter-spacing: .26em;
         }
-        .catalogue-section .card .status-badge.out-of-stock,
-        .catalogue-section .card.in-cart .status-badge { background: #000; color: #fff; }
+        .catalogue-section .card .status-badge.out-of-stock {
+    background: #fff;
+    color: #8a7a5c;
+    border: 1px solid #e5e2db;
+}
+.catalogue-section .card.in-cart .status-badge { background: #000; color: #fff; }
 
         .catalogue-section .card .thumb {
             aspect-ratio: 4 / 5;
@@ -2501,7 +2505,11 @@ function renderCatalogue() {
         return;
     }
 
-    const reversedProducts = [...productData].reverse();
+    const reversedProducts = [...productData].reverse().sort((a, b) => {
+    const aOut = a.stock === false ? 1 : 0;
+    const bOut = b.stock === false ? 1 : 0;
+    return aOut - bOut; // in-stock (0) first, out-of-stock (1) last
+});
 
     grid.innerHTML = reversedProducts.map(p => {
         const inStock = p.stock !== false;
@@ -2511,15 +2519,15 @@ function renderCatalogue() {
         const displayPrice = formatPrice(getItemUnitPrice(p, currentCurrency), currentCurrency);
         const resolvedImg = getProductImage(p);
         const description = productDescriptions[p.id] || 'Handcrafted jewellery piece from PLUMELLE.';
-        const badge = !inStock
-            ? '<div class="status-badge out-of-stock">Sold Out</div>'
-            : (inCart ? '<div class="status-badge">Added</div>' : '');
+       const badge = !inStock
+    ? '<div class="status-badge out-of-stock">Coming Soon</div>'
+    : (inCart ? '<div class="status-badge">Added</div>' : '');
 
         return `
         <div class="card ${inCart ? 'in-cart' : ''}" data-id="${p.id}">
             ${badge}
             <div class="thumb" onclick="openProductZoom('${resolvedImg}')">
-                <img class="default-img" src="${resolvedImg}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;removeProductCard('${p.id}')">
+                <img class="default-img" src="${resolvedImg}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.onerror=null;removeProductCard('${p.id}')">
             </div>
             <div class="info">
                 <span class="category-tag">${p.category}</span>
@@ -2529,9 +2537,9 @@ function renderCatalogue() {
                 <p class="id">${p.id}</p>
             </div>
 
-            ${!inStock ? `
-                <button class="toggle-btn out-of-stock" disabled>Sold Out</button>
-            ` : inCart ? `
+           ${!inStock ? `
+    <button class="toggle-btn out-of-stock" disabled>Coming Soon</button>
+` : inCart ? `
                 <div class="qty-controller">
                     <button class="qty-btn" onclick="updateQty('${p.id}', -1)">−</button>
                     <span class="qty-count">${qty}</span>
@@ -3510,6 +3518,19 @@ init();
     sync();
     new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
 })();
+// Auto-lazy-load ALL images that don't already have loading="lazy"
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img:not([loading])').forEach(img => {
+    img.setAttribute('loading', 'lazy');
+    img.setAttribute('decoding', 'async'); // also speeds up rendering
+  });
+});
+// Lazy-load safety net for any <img> missing loading attribute
+document.querySelectorAll('img:not([loading])').forEach(img => {
+  img.loading = 'lazy';
+  img.decoding = 'async';
+});
 </script>
+
 </body>
 </html>
