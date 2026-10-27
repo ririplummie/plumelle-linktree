@@ -18,7 +18,6 @@ body{background:var(--black);color:var(--ivory);font-family:var(--sans);font-wei
 .noise{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.045;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
 
-/* marquee */
 .marquee{overflow:hidden;white-space:nowrap;border-bottom:1px solid var(--line)}
 .marquee-track{display:inline-block;padding:10px 0;animation:marquee 26s linear infinite;font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--mute)}
 .marquee-track span{margin-right:44px}
@@ -36,7 +35,6 @@ h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,6vw,58px);lette
 .hero p{max-width:520px;margin:18px auto 0;color:#bdbab3;font-size:15px}
 .rule{width:44px;height:1px;background:var(--ivory);margin:26px auto 0}
 
-/* tabs */
 .tabs{display:flex;justify-content:center;gap:clamp(14px,4vw,46px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex-wrap:wrap;position:sticky;top:0;background:rgba(5,5,5,.92);backdrop-filter:blur(8px);z-index:10}
 .tab{background:none;border:0;color:var(--mute);font-family:var(--sans);font-size:11px;letter-spacing:.28em;text-transform:uppercase;padding:20px 4px;cursor:pointer;position:relative;transition:color .3s}
 .tab:hover{color:var(--ivory)}
@@ -98,68 +96,123 @@ footer .mini{font-family:var(--serif);font-size:20px;letter-spacing:.5em;color:v
 </div>
 
 <nav class="tabs" role="tablist" aria-label="Policies">
-  <button class="tab" role="tab" data-tab="shipping" aria-selected="true">Shipping &amp; Returns</button>
-  <button class="tab" role="tab" data-tab="privacy" aria-selected="false">Privacy</button>
-  <button class="tab" role="tab" data-tab="terms" aria-selected="false">Terms</button>
+  <button class="tab" role="tab" data-tab="shipping" aria-selected="true">Shipping &amp; Delivery</button>
+  <button class="tab" role="tab" data-tab="refunds" aria-selected="false">Refund &amp; Cancellation</button>
+  <button class="tab" role="tab" data-tab="privacy" aria-selected="false">Privacy Policy</button>
+  <button class="tab" role="tab" data-tab="terms" aria-selected="false">Terms of Service</button>
+  <button class="tab" role="tab" data-tab="grievance" aria-selected="false">Grievance Redressal</button>
+  <button class="tab" role="tab" data-tab="payment" aria-selected="false">Payment &amp; Security</button>
 </nav>
 
 <main class="wrap">
 
-<!-- SHIPPING -->
+<!-- SHIPPING & DELIVERY -->
 <section class="panel active" id="shipping" role="tabpanel">
-  <div class="panel-head"><h2>Shipping &amp; Returns</h2><p>How your piece gets made, moved and (if needed) made right.</p></div>
+  <div class="panel-head"><h2>Shipping &amp; Delivery Policy</h2><p>How your piece gets made and moved to you.</p></div>
 
   <div class="glance">
-    <div><b>≤ 30 days</b><span>To make</span></div>
+    <div><b>≤ 30 days</b><span>Production</span></div>
     <div><b>100%</b><span>Prepaid</span></div>
-    <div><b>Final</b><span>Sale</span></div>
-    <div><b>Credit</b><span>Not cash</span></div>
+    <div><b>Tracked</b><span>Courier</span></div>
+    <div><b>Insured</b><span>Transit</span></div>
   </div>
 
   <div class="grid">
-    <div class="item"><span class="n">01</span><h3>Made just for you</h3><p>Every piece is handmade to order. Please allow <b>up to 30 days</b> for production (macramé is usually quicker, up to 20). Busy seasons can stretch this a little.</p></div>
-    <div class="item"><span class="n">02</span><h3>On its way</h3><p>A courier partner carries your parcel. Delivery dates are honest estimates — weather, holidays and customs can nudge them. Once it leaves our hands, transit delays sit with the courier.</p></div>
-    <div class="item"><span class="n">03</span><h3>Pay first, then we begin</h3><p>We're a small studio, so orders are <b>100% prepaid by bank transfer</b>. No cash on delivery. Your order starts once your payment is confirmed.</p></div>
-    <div class="item"><span class="n">04</span><h3>All sales are final</h3><p>Because each piece is made for you, we can't cancel, exchange or take back an order for a change of mind. Unsure? Email us first — we'll happily send more photos or videos.</p></div>
-    <div class="item"><span class="n">05</span><h3>If something isn't right</h3><p>Damaged or wrong piece? Send <b>one unedited unboxing video within 24 hours</b> of delivery: sealed parcel, label, opening, the item. Damaged pieces get a free repair; wrong pieces get store credit once we've checked the return. You cover return shipping, plus a ₹500 handling &amp; inspection fee. International orders aren't eligible for repair.</p></div>
-    <div class="item"><span class="n">06</span><h3>Lost in transit?</h3><p>A late or stuck tracking page doesn't mean lost. We'll open a courier investigation, and if the loss is confirmed you'll get <b>store credit</b> for the product value (not shipping or taxes). No cash refunds or replacement shipments. Please keep all packaging until a claim is closed.</p></div>
-    <div class="item"><span class="n">07</span><h3>Refused or returned parcels</h3><p>If a parcel comes back because of a wrong address, a refusal or missed deliveries, there's no refund and re-sending is at your cost. Double-check your address and phone number!</p></div>
-    <div class="item"><span class="n">08</span><h3>Duties &amp; customs</h3><p>Within India, taxes are already in the price. For international orders, duties and import charges follow what's shown at checkout.</p></div>
-    <div class="item"><span class="n">09</span><h3>About store credit</h3><p>Only valid on our website, and can't be swapped for cash.</p></div>
-    <div class="item"><span class="n">10</span><h3>Care &amp; skin</h3><p>Keep pieces away from water, perfume, lotion and sunlight, and take them off to bathe, swim, work out or sleep. Small variations in beads, knots and finish are part of handmade charm, not defects. We can't promise nickel-free, so take care if your skin is sensitive. Small parts — keep away from children and pets.</p></div>
+    <div class="item"><span class="n">01</span><h3>Made to Order — Production Timeline</h3><p>Every piece is handmade to order. Please allow <b>up to 30 days</b> for production (macramé is usually quicker, up to 20 days). Peak seasons may extend this timeline; we will notify you of any material delay.</p></div>
+    <div class="item"><span class="n">02</span><h3>Courier Partner &amp; Transit</h3><p>We ship via a third-party courier partner. Delivery dates are estimates and not guaranteed. Once handed to the courier, transit timelines are governed by the courier's terms. Weather, holidays and customs may cause delays.</p></div>
+    <div class="item"><span class="n">03</span><h3>Prepaid Orders Only</h3><p>As a small studio, all orders are <b>100% prepaid via bank transfer or approved online payment methods</b>. Cash on Delivery is not available. Production begins only after payment is verified and confirmed.</p></div>
+    <div class="item"><span class="n">04</span><h3>Address Accuracy</h3><p>You are responsible for providing a complete and accurate delivery address and phone number. If a parcel is returned due to an incorrect address, refusal, or missed delivery, no refund will be issued and re-shipping will be at your cost.</p></div>
+    <div class="item"><span class="n">05</span><h3>International Orders — Duties &amp; Customs</h3><p>For orders within India, applicable taxes are included in the price. For international orders, any duties, import fees or customs charges levied at the destination are the recipient's responsibility, unless expressly stated otherwise at checkout.</p></div>
+    <div class="item"><span class="n">06</span><h3>Risk of Loss</h3><p>Risk of loss or damage passes to you upon delivery to the courier. However, if a parcel is confirmed lost in transit by the courier's investigation, you will receive <b>store credit</b> for the product value (excluding shipping and taxes). No cash refunds or replacement shipments will be issued. Please retain all packaging until any claim is closed.</p></div>
+  </div>
+</section>
+
+<!-- REFUND & CANCELLATION -->
+<section class="panel" id="refunds" role="tabpanel">
+  <div class="panel-head"><h2>Refund, Cancellation &amp; Return Policy</h2><p>Clear timelines, so there are no surprises.</p></div>
+
+  <div class="glance">
+    <div><b>No</b><span>Cancellation</span></div>
+    <div><b>No</b><span>Cash Refund</span></div>
+    <div><b>5–7 days</b><span>Credit Issued</span></div>
+    <div><b>48 hrs</b><span>Claim Window</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="item"><span class="n">01</span><h3>Cancellation Policy</h3><p>All orders are made to order and personalised. Once an order is placed and payment is confirmed, it <b>cannot be cancelled</b>. If you are unsure before ordering, please contact us for additional photos or videos.</p></div>
+    <div class="item"><span class="n">02</span><h3>Return Policy</h3><p>Because each piece is custom-made, we do not accept returns for change of mind. Returns are only accepted for <b>damaged or incorrectly shipped items</b>, subject to the conditions below.</p></div>
+    <div class="item"><span class="n">03</span><h3>Refund Policy — Store Credit</h3><p>Approved claims will be resolved via <b>store credit only</b>, not cash refunds. Store credit is issued within <b>5–7 business days</b> of claim approval. Credit is valid only on our website and cannot be exchanged for cash.</p></div>
+    <div class="item"><span class="n">04</span><h3>Damaged or Wrong Item Claims</h3><p>You must submit <b>one unedited unboxing video within 24 hours of delivery</b>, showing: the sealed parcel, shipping label, the opening process, and the item. Damaged items are eligible for a free repair (domestic orders only); wrong items are eligible for store credit after we receive and inspect the return.</p></div>
+    <div class="item"><span class="n">05</span><h3>Return Shipping &amp; Handling Fee</h3><p>For approved returns, you are responsible for return shipping costs plus a <b>₹500 handling and inspection fee</b>. This fee will be deducted from any store credit issued. International orders are not eligible for repair or return.</p></div>
+    <div class="item"><span class="n">06</span><h3>Refund Processing Timeline</h3><p>Once an approved return is received and inspected, store credit will be issued within <b>5–7 business days</b>. You will receive an email confirmation with your credit details.</p></div>
+    <div class="item wide"><span class="n">07</span><h3>Lost in Transit</h3><p>If the courier confirms loss in transit, you will receive store credit for the product value (excluding shipping and taxes) within <b>5–7 business days</b> of claim closure. No cash refunds or replacement shipments will be issued.</p></div>
   </div>
 </section>
 
 <!-- PRIVACY -->
 <section class="panel" id="privacy" role="tabpanel">
-  <div class="panel-head"><h2>Privacy</h2><p>What we keep, why we keep it, and who sees it.</p></div>
+  <div class="panel-head"><h2>Privacy Policy &amp; Data Protection</h2><p>What we collect, why we collect it, and who sees it.</p></div>
   <div class="grid">
-    <div class="item"><span class="n">01</span><h3>What we collect</h3><p>Your name, email, phone, delivery &amp; billing address, order and customisation details, plus light, anonymous site analytics (clicks, carts, purchases, a random session ID). We don't intentionally collect IP addresses.</p></div>
-    <div class="item"><span class="n">02</span><h3>Why</h3><p>To make and ship your order, answer your messages, and make the shop better. That's it.</p></div>
-    <div class="item"><span class="n">03</span><h3>Who sees it</h3><p>Our courier, payment partners (Wise and Xflow Pay for international transfers) and Supabase, which hosts accounts. They only get what they need. <b>We never sell or rent your data.</b></p></div>
-    <div class="item"><span class="n">04</span><h3>Payments</h3><p>We never store your passwords or full card or bank credentials — and please don't email them to us.</p></div>
-    <div class="item"><span class="n">05</span><h3>Marketing</h3><p>Only if you opt in. Unsubscribe any time; ordering never depends on it.</p></div>
-    <div class="item"><span class="n">06</span><h3>Cookies</h3><p>Just the basics, for your cart, preferences and simple analytics. You can block them in your browser, but your cart may stop working.</p></div>
-    <div class="item"><span class="n">07</span><h3>Adults only</h3><p>Our shop is for people 18 and over. Under 18? Please ask a parent or guardian to order for you.</p></div>
-    <div class="item"><span class="n">08</span><h3>Your rights</h3><p>Ask to see, fix or delete your data, or withdraw consent, any time at <b>relations@plumelleatellie.com</b>. We keep only what the law or our records require.</p></div>
-    <div class="item wide"><span class="n">09</span><h3>Staying safe</h3><p>We take reasonable steps to protect your information, though no website can promise perfect security.</p></div>
+    <div class="item"><span class="n">01</span><h3>Information We Collect</h3><p>We collect your name, email, phone number, delivery and billing address, order and customisation details, and anonymous site analytics (clicks, cart activity, purchases, and a random session ID). We do not intentionally collect IP addresses.</p></div>
+    <div class="item"><span class="n">02</span><h3>Purpose of Collection</h3><p>Your data is used solely to: (a) process and ship your order; (b) respond to your enquiries; (c) improve our website and services. We do not use your data for any other purpose without your consent.</p></div>
+    <div class="item"><span class="n">03</span><h3>Data Sharing &amp; Disclosure</h3><p>We share limited data with: our courier partner (for delivery), payment partners (Wise and Xflow Pay for international transfers), and Supabase (account hosting). These parties receive only the information necessary to perform their services. <b>We never sell or rent your personal data to any third party.</b></p></div>
+    <div class="item"><span class="n">04</span><h3>Payment Data Security</h3><p>We do not store your passwords, full card numbers, or bank credentials. All payment processing is handled by our payment partners. Please do not email us sensitive payment information.</p></div>
+    <div class="item"><span class="n">05</span><h3>Marketing Communications</h3><p>We will only send you marketing communications if you have opted in. You may unsubscribe at any time. Order processing and delivery communications are not affected by your marketing preferences.</p></div>
+    <div class="item"><span class="n">06</span><h3>Cookies &amp; Tracking</h3><p>We use essential cookies for cart functionality, preference storage, and basic analytics. You can disable cookies in your browser settings, but cart functionality may be affected.</p></div>
+    <div class="item"><span class="n">07</span><h3>Age Requirement</h3><p>Our website is intended for individuals aged 18 and over. If you are under 18, please have a parent or guardian place the order on your behalf.</p></div>
+    <div class="item"><span class="n">08</span><h3>Your Rights</h3><p>You may request access to, correction of, or deletion of your personal data, or withdraw consent, by contacting us at <b>relations@plumelleatellie.com</b>. We will retain data only as required by law or for our legitimate business records.</p></div>
+    <div class="item wide"><span class="n">09</span><h3>Data Security</h3><p>We implement reasonable technical and organisational measures to protect your information. However, no website or transmission method can guarantee absolute security.</p></div>
   </div>
 </section>
 
-<!-- TERMS -->
+<!-- TERMS OF SERVICE -->
 <section class="panel" id="terms" role="tabpanel">
-  <div class="panel-head"><h2>Terms</h2><p>The ground rules for shopping with us.</p></div>
+  <div class="panel-head"><h2>Terms of Service (Website Usage)</h2><p>The ground rules for shopping with us.</p></div>
   <div class="grid">
-    <div class="item"><span class="n">01</span><h3>18 and over</h3><p>By using the shop you confirm you're at least 18 years old.</p></div>
-    <div class="item"><span class="n">02</span><h3>Prices &amp; offers</h3><p>Prices can change, but confirmed orders keep the price you paid. Promotions may be changed or withdrawn.</p></div>
-    <div class="item"><span class="n">03</span><h3>When an order is official</h3><p>Placing an order is a request. It's accepted once we've verified your payment and confirmed. If we can't fulfil an order you've paid for, you'll be refunded.</p></div>
-    <div class="item"><span class="n">04</span><h3>Custom pieces</h3><p>Please double-check size, colour and specifications. Once we've received a custom order, it can't be changed.</p></div>
-    <div class="item"><span class="n">05</span><h3>Your account</h3><p>Keep your login safe and tell us if something looks off. We may pause an account for security or misuse.</p></div>
-    <div class="item"><span class="n">06</span><h3>Handmade &amp; photos</h3><p>Screens and lighting vary, and handmade means small differences in colour, texture and size. That's normal.</p></div>
-    <div class="item"><span class="n">07</span><h3>Our designs are ours</h3><p>Please don't copy, repost or resell our content. Pieces are for personal use, not resale under another brand.</p></div>
-    <div class="item"><span class="n">08</span><h3>Reviews</h3><p>Be honest and kind. Your words stay yours; you let us display them. We may remove anything unlawful or abusive.</p></div>
-    <div class="item"><span class="n">09</span><h3>Fair play</h3><p>No fraud, spam, scraping or hacking. We may refuse or cancel orders involving fraud, abuse, pricing errors, or anything we can't reasonably fulfil.</p></div>
-    <div class="item"><span class="n">10</span><h3>Liability</h3><p>The site is provided as available, with no promise it's always error-free. We're not responsible for damage from misuse, accidents or normal wear.</p></div>
+    <div class="item"><span class="n">01</span><h3>Eligibility — 18 and Over</h3><p>By using this website, you confirm that you are at least 18 years of age and legally capable of entering into a binding contract.</p></div>
+    <div class="item"><span class="n">02</span><h3>Pricing &amp; Offers</h3><p>Prices are subject to change without notice. Confirmed orders will honour the price paid at the time of order confirmation. Promotional offers may be modified or withdrawn at any time.</p></div>
+    <div class="item"><span class="n">03</span><h3>Order Acceptance</h3><p>Placing an order constitutes a request to purchase. An order is accepted only after we verify payment and send a confirmation. If we are unable to fulfil a paid order, you will receive a refund.</p></div>
+    <div class="item"><span class="n">04</span><h3>Custom &amp; Personalised Orders</h3><p>Please verify all specifications (size, colour, design) before placing a custom order. Once a custom order is received, it cannot be modified or cancelled.</p></div>
+    <div class="item"><span class="n">05</span><h3>Account Security</h3><p>You are responsible for maintaining the confidentiality of your account credentials. Notify us immediately of any unauthorised use. We may suspend accounts for security or misuse reasons.</p></div>
+    <div class="item"><span class="n">06</span><h3>Product Variations</h3><p>As all items are handmade, minor variations in colour, texture, and size are normal and not considered defects. Screen displays may also affect colour perception.</p></div>
+    <div class="item"><span class="n">07</span><h3>Intellectual Property</h3><p>All designs, images, and content on this website are our property. You may not copy, reproduce, repost, or resell our content. Products are for personal use only and may not be resold under another brand.</p></div>
+    <div class="item"><span class="n">08</span><h3>Reviews &amp; User Content</h3><p>You retain ownership of any reviews you submit. By submitting a review, you grant us a licence to display it on our website. We reserve the right to remove any content that is unlawful, abusive, or misleading.</p></div>
+    <div class="item"><span class="n">09</span><h3>Prohibited Conduct</h3><p>You may not engage in fraud, spam, scraping, hacking, or any activity that interferes with the website's operation. We may refuse or cancel orders involving fraud, abuse, pricing errors, or any order we cannot reasonably fulfil.</p></div>
+    <div class="item"><span class="n">10</span><h3>Limitation of Liability</h3><p>The website is provided on an "as available" basis without any guarantee of uninterrupted or error-free operation. To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from misuse, accidents, or normal wear and tear.</p></div>
+  </div>
+</section>
+
+<!-- GRIEVANCE REDRESSAL -->
+<section class="panel" id="grievance" role="tabpanel">
+  <div class="panel-head"><h2>Grievance Redressal &amp; Dispute Resolution</h2><p>We are committed to resolving your concerns promptly.</p></div>
+
+  <div class="glance">
+    <div><b>48 hrs</b><span>Acknowledgment</span></div>
+    <div><b>1 month</b><span>Resolution</span></div>
+    <div><b>Email</b><span>Channel</span></div>
+    <div><b>India</b><span>Jurisdiction</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="item wide"><span class="n">01</span><h3>Grievance Officer</h3><p>In accordance with the Consumer Protection (E-Commerce) Rules, 2020, and applicable RBI guidelines for payment system participants, we have appointed a Grievance Officer to address your complaints.</p><p style="margin-top:14px"><b>Name:</b> [Grievance Officer Name]<br><b>Email:</b> relations@plumelleatellie.com<br><b>Phone:</b> [Phone Number]<br><b>Working Hours:</b> Monday–Friday, 10:00 AM – 6:00 PM IST</p></div>
+    <div class="item"><span class="n">02</span><h3>Acknowledgment Timeline</h3><p>We will acknowledge receipt of your complaint within <b>48 hours</b> of receipt during business days.</p></div>
+    <div class="item"><span class="n">03</span><h3>Resolution Timeline</h3><p>We will endeavour to resolve your complaint within <b>one month</b> from the date of receipt. If additional time is required, we will inform you of the reasons and expected timeline.</p></div>
+    <div class="item"><span class="n">04</span><h3>Escalation</h3><p>If you are not satisfied with the resolution, you may escalate the matter to our management at <b>relations@plumelleatellie.com</b> with the subject line "Escalation — Grievance."</p></div>
+    <div class="item"><span class="n">05</span><h3>Governing Law &amp; Jurisdiction</h3><p>These terms and any disputes arising from them are governed by the laws of India. The courts at <b>[City], India</b> shall have exclusive jurisdiction over any disputes.</p></div>
+  </div>
+</section>
+
+<!-- PAYMENT & SECURITY -->
+<section class="panel" id="payment" role="tabpanel">
+  <div class="panel-head"><h2>Payment Terms &amp; Security</h2><p>How payments work and how we protect your data.</p></div>
+  <div class="grid">
+    <div class="item"><span class="n">01</span><h3>Accepted Payment Methods</h3><p>We accept payments via bank transfer and approved online payment methods as displayed at checkout. All orders are <b>100% prepaid</b>. Cash on Delivery is not available.</p></div>
+    <div class="item"><span class="n">02</span><h3>Payment Processing</h3><p>Payments are processed by third-party payment partners (including Wise and Xflow Pay for international transfers). These partners are responsible for the secure processing of your payment information.</p></div>
+    <div class="item"><span class="n">03</span><h3>Card Data Security &amp; Tokenisation</h3><p>We do not store your complete card number, CVV, or bank credentials on our servers. Card payments are processed via <b>tokenisation</b> in accordance with RBI guidelines — your card details are replaced with a secure token, and the actual card information is never stored by us.</p></div>
+    <div class="item"><span class="n">04</span><h3>Payment Confirmation</h3><p>Your order will not enter production until payment is verified and confirmed. If payment fails or is reversed, the order will not be processed.</p></div>
+    <div class="item"><span class="n">05</span><h3>Refunds to Payment Method</h3><p>Where a refund is approved (e.g., if we cannot fulfil a paid order), it will be processed to the original payment method within <b>5–7 business days</b>, unless otherwise agreed. Store credit is the default resolution for product-related claims, as outlined in our Refund Policy.</p></div>
+    <div class="item"><span class="n">06</span><h3>Fraud Prevention</h3><p>We reserve the right to refuse or cancel any order suspected of fraud, unauthorised payment, or abuse. We may request additional verification before processing such orders.</p></div>
+    <div class="item wide"><span class="n">07</span><h3>Payment Gateway Disclaimer</h3><p>Our payment gateway and payment aggregator partners are independent third parties. They are not responsible for product delivery, quality, or customer service. All product-related disputes must be directed to us at <b>relations@plumelleatellie.com</b>.</p></div>
   </div>
 </section>
 

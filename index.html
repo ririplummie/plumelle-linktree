@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PLUMELLE — Find Us Everywhere</title>
+    <title>Plumelle — Handcrafted Jewellery Online Store</title>
+    <meta name="description" content="Shop handcrafted Plumelle jewellery online. Secure checkout, clear shipping and returns policies, delivery to India, UAE, Singapore, Australia and New Zealand.">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
@@ -1792,6 +1793,93 @@
             transition: .3s;
         }
         .policy-btn:hover { background: #fff; color: #000; }
+    
+        /* =========================================================
+           STORE LAYOUT OVERRIDES
+        ========================================================= */
+        body { background: #fff; color: #0b0b0b; font-family: "Jost", "DM Sans", sans-serif; }
+        .page { max-width: 680px; padding: 0 0 0; }
+        .catalogue-section { margin-top: 0; }
+
+        .sf-announce {
+            background: #000; color: #fff; text-align: center;
+            font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+            padding: 10px 14px; line-height: 1.5;
+        }
+        .sf-header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(255,255,255,.97); backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e5e2db;
+        }
+        .sf-header-inner {
+            max-width: 1180px; margin: 0 auto; padding: 16px 22px;
+            display: flex; align-items: center; justify-content: space-between; gap: 24px;
+        }
+        .sf-logo-link { text-decoration: none; color: #000; }
+        .sf-logo {
+            font-family: "Bodoni Moda", "Didot", "Times New Roman", serif;
+            font-weight: 400; font-size: 24px; letter-spacing: .32em; color: #000;
+        }
+        .sf-nav { display: flex; gap: 30px; }
+        .sf-nav a {
+            color: #000; text-decoration: none; font-size: 11px;
+            letter-spacing: .2em; text-transform: uppercase; padding-bottom: 3px;
+            border-bottom: 1px solid transparent; transition: border-color .2s;
+        }
+        .sf-nav a:hover { border-bottom-color: #000; }
+        .sf-bag {
+            position: relative; background: none; border: 0; color: #000;
+            font-size: 18px; cursor: pointer; padding: 6px 8px;
+        }
+        .sf-bag-count {
+            position: absolute; top: -4px; right: -6px; min-width: 17px; height: 17px;
+            border-radius: 50%; background: #000; color: #fff; font-size: 9px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: "Jost", sans-serif;
+        }
+        .sf-trust {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 34px;
+            padding: 14px 22px; background: #faf9f6; border-bottom: 1px solid #e5e2db;
+            font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #4a4741;
+        }
+        .sf-trust i { margin-right: 6px; color: #000; }
+
+        footer.sf-footer {
+            width: 100vw; margin: 0 0 0 calc(-50vw + 50%);
+            background: #000; color: #cfcbc2; text-align: left;
+            font-size: 13px; letter-spacing: normal; padding: 60px max(22px, calc((100vw - 1180px) / 2)) 28px;
+            font-family: "Jost", "DM Sans", sans-serif;
+        }
+        .sf-footer-grid {
+            display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 40px;
+            padding-bottom: 40px; border-bottom: 1px solid #2b2b2b;
+        }
+        .sf-footer-logo {
+            font-family: "Bodoni Moda", "Didot", serif; color: #fff;
+            font-size: 20px; letter-spacing: .3em; margin-bottom: 14px;
+        }
+        .sf-footer p { line-height: 1.7; color: #9a968d; max-width: 320px; }
+        .sf-footer h4 {
+            color: #fff; font-weight: 500; font-size: 11px;
+            letter-spacing: .24em; text-transform: uppercase; margin-bottom: 16px;
+        }
+        .sf-footer-grid a {
+            display: block; color: #cfcbc2; text-decoration: none;
+            margin-bottom: 10px; line-height: 1.5; word-break: break-word;
+        }
+        .sf-footer-grid a:hover { color: #fff; text-decoration: underline; }
+        .sf-footer-bottom { padding-top: 22px; font-size: 11px; letter-spacing: .08em; color: #8b877e; }
+        .sf-footer-bottom a { color: #cfcbc2; text-decoration: none; }
+
+        @media (max-width: 760px) {
+            .sf-header-inner { flex-wrap: wrap; padding: 12px 16px; gap: 10px 16px; }
+            .sf-logo { font-size: 20px; }
+            .sf-nav { order: 3; width: 100%; gap: 20px; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; }
+            .sf-bag { margin-left: auto; }
+            .sf-trust { gap: 8px 18px; font-size: 9.5px; }
+            .sf-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
+            .sf-footer-grid > div:first-child { grid-column: 1 / -1; }
+        }
     </style>
 </head>
 
@@ -1833,318 +1921,35 @@
         </form>
     </div>
 </div>
-<div class="noise"></div>
 
-<div class="background-shape shape-one"></div>
-<div class="background-shape shape-two"></div>
-<div class="background-shape shape-three"></div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<main class="page">
-
-    <!-- TOP MOVING TEXT -->
-    <div class="marquee">
-        <div class="marquee-track">
-            <span class="lime">PLUMELLE</span>
-            <span>HANDMADE JEWELLERY</span>
-            <span class="lime">ORDER NOW</span>
-            <span>WEAR SOMETHING WEIRD</span>
-            <span class="lime">PLUMELLE</span>
-            <span>HANDMADE JEWELLERY</span>
-            <span class="lime">ORDER NOW</span>
-            <span>WEAR SOMETHING WEIRD</span>
-            <span class="lime">ORDER NOW</span>
-            <span>DM TO ORDER</span>
-        </div>
+<!-- STORE HEADER -->
+<div class="sf-announce">Handcrafted jewellery &nbsp;·&nbsp; Secure checkout &nbsp;·&nbsp; Delivery to India, UAE, Singapore, Australia &amp; New Zealand</div>
+<header class="sf-header">
+    <div class="sf-header-inner">
+        <a class="sf-logo-link" href="index.html" aria-label="Plumelle home"><h1 class="sf-logo">PLUMELLE</h1></a>
+        <nav class="sf-nav" aria-label="Main">
+            <a href="#catalogue">Shop</a>
+            <a href="term.html">Shipping &amp; Payment</a>
+            <a href="term.html">Terms &amp; Policies</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <button class="sf-bag" type="button" onclick="generateBill()" aria-label="Open bag">
+            <i class="fas fa-bag-shopping"></i><span class="sf-bag-count" id="hdrCartCount">0</span>
+        </button>
     </div>
-
-    <!-- RANDOM DECORATION -->
-    <div class="sticker one">★ EST. 2026</div>
-    <div class="sticker two">HANDMADE ↑</div>
-
-    <!-- PROFILE -->
-    <section class="profile">
-
-        <div class="pfp-wrap">
-
-            <div class="pfp-ring"></div>
-            <div class="pfp-ring two"></div>
-
-            <img src="pfp.png"
-                 alt="PLUMELLE"
-                 class="pfp"
-                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22125%22 height=%22125%22%3E%3Crect fill=%22%23333%22 width=%22125%22 height=%22125%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-family=%22sans-serif%22 font-size=%2212%22%3EPLUMELLE%3C/text%3E%3C/svg%3E'">
-
-            <div class="verified">
-                <i class="fas fa-check"></i>
-            </div>
-
-        </div>
-
-        <h1 class="brand-name">
-            PLUM<span>E</span>LLE
-        </h1>
-
-        <div class="handle">
-            @plumelle.officiel
-        </div>
-
-        <p class="bio">
-            Handmade jewellery for people who don't want to look like
-            <strong>everyone else.</strong><br>
-            Worn everywhere.
-        </p>
-
-    </section><center>
-<div style="background: #0d0d0d; color: #ccc; padding: 12px; border: 2px solid #39ff14; border-radius: 12px; font-family: monospace; font-size: 11px; max-width: 320px; line-height: 1.3; box-shadow: 0 0 10px rgba(57,255,20,0.3);">
-
-  <div style="text-align: center; margin-bottom: 8px;">
-    <strong style="color: #39ff14; text-transform: uppercase; font-size: 11px; display: block;">Handcrafted Jewelry</strong>
-    <span style="font-size: 10px; color: #777;">🌏 India, UAE, SG, AUS &amp; NZ</span>
-  </div>
-
-  <div style="border-top: 1px dashed #39ff14; margin: 8px 0; opacity: 0.5;"></div>
-
-  <strong style="color: #39ff14; font-size: 10.5px;">📦 HOW TO ORDER</strong>
-  <ol style="padding-left: 16px; margin: 4px 0 8px 0;">
-    <li>Add items to cart</li>
-    <li>Checkout for Order Bill</li>
-    <li>Screenshot your Bill</li>
-    <li>DM screenshot to confirm</li>
-  </ol>
-
-  <div style="border-top: 1px dashed #39ff14; margin: 8px 0; opacity: 0.5;"></div>
-
-  <strong style="color: #39ff14; font-size: 10.5px;">🇮🇳 INDIA ONLY</strong>
-  <p style="margin: 3px 0;">Pay via UPI on site. DM both:</p>
-  <ul style="padding-left: 14px; margin: 3px 0 6px 0;">
-    <li>Order Bill screenshot</li>
-    <li>UPI payment screenshot</li>
-  </ul>
-
-  <div style="border-top: 1px dashed #39ff14; margin: 8px 0; opacity: 0.5;"></div>
-
-  <strong style="color: #39ff14; font-size: 10.5px;">🌍 INTL (UAE, SG, AUS, NZ)</strong>
-  <p style="margin: 3px 0;">DM Bill screenshot. We'll send payment link for items + shipping.</p>
-
-  <div style="border-top: 1px dashed #39ff14; margin: 8px 0; opacity: 0.5;"></div>
-
-  <strong style="color: #39ff14; font-size: 10.5px;">🎁 GIFT PACKAGING</strong>
-  <ul style="padding-left: 14px; margin: 3px 0 6px 0;">
-    <li>Box, pouch, wrap &amp; note</li>
-  </ul>
-  <strong style="color: #39ff14; font-size: 10px;">Rates:</strong>
-  <ul style="padding-left: 14px; margin: 2px 0 6px 0;">
-    <li>🇮🇳 ₹100 | 🇦🇪 10 AED | 🇸🇬 $4</li>
-    <li>🇦🇺 $5 AUD | 🇳🇿 $6 NZD</li>
-  </ul>
-  <span style="color: #777; font-size: 9.5px;">*Tell us in DM to add</span>
-
-  <div style="border-top: 1px dashed #39ff14; margin: 8px 0; opacity: 0.5;"></div>
-
-  <div style="text-align: center; color: #39ff14; font-weight: bold; font-size: 10.5px;">
-    ⬇️ SHOP BELOW ⬇️
-  </div>
-
+</header>
+<div class="sf-trust">
+    <span><i class="fas fa-gem"></i> Handmade to order</span>
+    <span><i class="fas fa-lock"></i> Secure checkout</span>
+    <span><i class="fas fa-truck-fast"></i> Tracked shipping</span>
+    <span><i class="fas fa-file-lines"></i> Clear returns &amp; privacy policies</span>
 </div>
-    <!-- SOCIAL ICONS -->
-    <div class="socials">
 
-        <a class="social"
-           href="https://www.facebook.com/people/Plumelle/61585550620617/?ref=PROFILE_EDIT_xav_ig_profile_page_web#"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-
-        <a class="social"
-           href="https://www.youtube.com/channel/UCrgJ0_fa6Et5-BEGWKDfYFA"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="YouTube">
-            <i class="fab fa-youtube"></i>
-        </a>
-
-        <a class="social"
-           href="https://www.instagram.com/plumelle.officiel/"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-
-        <a class="social"
-           href="https://pin.it/6CE6LJ1LG"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Pinterest">
-            <i class="fab fa-pinterest-p"></i>
-        </a>
-
-        <a class="social"
-           href="https://www.threads.com/@plumelle.officiel"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Threads">
-            <i class="fab fa-threads"></i>
-        </a>
-
-        <a class="social"
-           href="https://wa.me/919007674130"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-
-        <a class="social"
-           href="mailto:plumelleofficielrequests@gmail.com"
-           aria-label="Email">
-            <i class="fas fa-envelope"></i>
-        </a>
-
-    </div>
-
-    <!-- MAIN LINKS -->
-    <section class="links">
-
-        <!-- SHOP -->
-        <a class="link featured"
-           href="#catalogue"
-           onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'}); return false;">
-
-            <div class="link-icon">
-                <i class="fas fa-bag-shopping"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">SHOP PLUMELLE</span>
-                <span class="link-sub">Browse our catalogue below</span>
-            </div>
-
-        </a>
-
-        <!-- INSTAGRAM -->
-        <a class="link"
-           href="https://www.instagram.com/plumelle.officiel/"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            <div class="link-icon">
-                <i class="fab fa-instagram"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">INSTAGRAM</span>
-                <span class="link-sub">@plumelle.officiel</span>
-            </div>
-
-        </a>
-
-        <!-- YOUTUBE -->
-        <a class="link"
-           href="https://www.youtube.com/channel/UCrgJ0_fa6Et5-BEGWKDfYFA"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            <div class="link-icon">
-                <i class="fab fa-youtube"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">YOUTUBE</span>
-                <span class="link-sub">Videos, shorts & PLUMELLE content</span>
-            </div>
-
-        </a>
-
-        <!-- FACEBOOK -->
-        <a class="link"
-           href="https://www.facebook.com/people/Plumelle/61585550620617/"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            <div class="link-icon">
-                <i class="fab fa-facebook-f"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">FACEBOOK</span>
-                <span class="link-sub">Follow PLUMELLE on Facebook</span>
-            </div>
-
-        </a>
-
-        <!-- PINTEREST -->
-        <a class="link"
-           href="https://pin.it/6CE6LJ1LG"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            <div class="link-icon">
-                <i class="fab fa-pinterest-p"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">PINTEREST</span>
-                <span class="link-sub">Moodboards, jewellery & inspiration</span>
-            </div>
-
-        </a>
-
-        <!-- THREADS -->
-        <a class="link"
-           href="https://www.threads.com/@plumelle.officiel"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            <div class="link-icon">
-                <i class="fab fa-threads"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">THREADS</span>
-                <span class="link-sub">Come hang out with us</span>
-            </div>
-
-        </a>
-
-        <!-- WHATSAPP -->
-        <a class="link"
-           href="https://wa.me/919007674130"
-           target="_blank"
-           rel="noopener noreferrer">
-
-            <div class="link-icon">
-                <i class="fab fa-whatsapp"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">WHATSAPP</span>
-                <span class="link-sub">Questions? Message PLUMELLE</span>
-            </div>
-
-        </a>
-
-        <!-- EMAIL -->
-        <a class="link"
-           href="mailto:plumelleofficielrequests@gmail.com">
-
-            <div class="link-icon">
-                <i class="fas fa-envelope"></i>
-            </div>
-
-            <div class="link-text">
-                <span class="link-title">EMAIL US</span>
-                <span class="link-sub">plumelleofficielrequests@gmail.com</span>
-            </div>
-
-        </a>
-
-    </section>
+<main class="page">
 
     <!-- ========================================================= -->
     <!-- CATALOGUE SECTION -->
@@ -2357,18 +2162,32 @@
     </div>
 
     <!-- FOOTER -->
-    <footer>
-
-        <div class="mini-logo">
-            PLUMELLE
+    <footer class="sf-footer">
+        <div class="sf-footer-grid">
+            <div>
+                <div class="sf-footer-logo">PLUMELLE</div>
+                <p>Handcrafted jewellery, made to order and shipped from India to customers in India, UAE, Singapore, Australia and New Zealand.</p>
+            </div>
+            <div>
+                <h4>Shop</h4>
+                <a href="#catalogue">All products</a>
+              
+            </div>
+            <div>
+                <h4>Policies</h4>
+                <a href="term.html">Shipping Policy</a>
+                <a href="term.html">Returns &amp; Refunds</a>
+                <a href="term.html">Customs &amp; Duties</a>
+                <a href="term.html">Privacy Policy</a>
+                <a href="term.html">Terms of Service</a>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <a href="contact.html">Contact Us</a>
+                <a href="mailto:plumelleofficielrequests@gmail.com">plumelleofficielrequests@gmail.com</a>
+            </div>
         </div>
-
-        <a class="policy-btn" href="term.html">Terms &amp; Policies</a>
-		 <a class="policy-btn" href="contact.html">Contact Us</a>
-<br>
-
-        MADE WITH <span class="heart">♥</span>
-
+        <div class="sf-footer-bottom">&copy; 2026 Plumelle. All rights reserved. &nbsp;·&nbsp; <a href="term.html">Terms &amp; Policies</a></div>
     </footer>
 
 </main>
@@ -3681,5 +3500,16 @@ async function init() {
 init();
 </script>
 
+
+<script>
+(function () {
+    var src = document.getElementById('cartCount');
+    var dst = document.getElementById('hdrCartCount');
+    if (!src || !dst) return;
+    function sync() { dst.textContent = src.textContent; }
+    sync();
+    new MutationObserver(sync).observe(src, { childList: true, characterData: true, subtree: true });
+})();
+</script>
 </body>
 </html>
