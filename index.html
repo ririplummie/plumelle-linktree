@@ -1926,8 +1926,802 @@
     </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════════
+     PLUMELLE WAITLIST POPUP — paste anywhere inside <body>
+     Self-contained: no dependencies, no conflicts with existing CSS.
+     ══════════════════════════════════════════════════════════════════ -->
+<style>
+  /* Scoped to .plw- prefix so nothing else on the page is affected */
+  .plw-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 999990;
+    background: rgba(10, 10, 10, 0.72);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+  }
+  .plw-scrim.plw-open {
+    opacity: 1;
+    visibility: visible;
+  }
 
-<!-- Toast -->
+  .plw-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999991;
+    transform: translate(-50%, -46%) scale(0.96);
+    width: min(92vw, 460px);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff;
+    color: #0d0d0d;
+    border: 1px solid #0d0d0d;
+    box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+    font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .plw-modal.plw-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Thin top rule, editorial feel */
+  .plw-modal::before {
+    content: "";
+    display: block;
+    height: 3px;
+    background: #0d0d0d;
+  }
+
+  .plw-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: #0d0d0d;
+    opacity: 0.45;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    padding: 0;
+  }
+  .plw-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+  }
+
+  .plw-body {
+    padding: 44px 36px 34px;
+    text-align: center;
+  }
+
+  .plw-eyebrow {
+    margin: 0 0 14px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: #0d0d0d;
+    opacity: 0.55;
+  }
+
+  .plw-title {
+    margin: 0 0 8px;
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(26px, 4.6vw, 34px);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: #0d0d0d;
+  }
+
+  .plw-rule {
+    width: 36px;
+    height: 1px;
+    margin: 18px auto 20px;
+    background: #0d0d0d;
+    opacity: 0.65;
+  }
+
+  .plw-copy {
+    margin: 0 auto 26px;
+    max-width: 34ch;
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.85;
+    letter-spacing: 0.02em;
+    color: #555555;
+  }
+
+  .plw-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .plw-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: #0d0d0d;
+    background: #ffffff;
+    border: 1px solid #0d0d0d;
+    border-radius: 0;
+    outline: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .plw-input::placeholder {
+    color: #9a9a9a;
+    font-style: italic;
+    letter-spacing: 0.02em;
+  }
+  .plw-input:focus {
+    background: #f7f7f7;
+  }
+  .plw-input.plw-error {
+    border-color: #b00020;
+    background: #fff5f6;
+  }
+
+  .plw-btn {
+    position: relative;
+    width: 100%;
+    padding: 15px 20px;
+    font-family: inherit;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: #0d0d0d;
+    border: 1px solid #0d0d0d;
+    border-radius: 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.3s ease;
+  }
+  .plw-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+  }
+  .plw-btn span {
+    position: relative;
+    z-index: 2;
+  }
+  .plw-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .plw-btn:hover {
+    color: #0d0d0d;
+  }
+  .plw-btn:disabled {
+    cursor: wait;
+    opacity: 0.6;
+  }
+  .plw-btn:disabled::before {
+    display: none;
+  }
+
+  .plw-perks {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin: 24px 0 0;
+    padding: 18px 0 0;
+    border-top: 1px solid rgba(13, 13, 13, 0.14);
+    list-style: none;
+  }
+  .plw-perks li {
+    font-size: 0.56rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0d0d0d;
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+
+  .plw-msg {
+    display: none;
+    margin: 14px auto 0;
+    max-width: 34ch;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.7;
+  }
+  .plw-msg.plw-show {
+    display: block;
+  }
+  .plw-msg.plw-err {
+    color: #b00020;
+  }
+
+  .plw-success {
+    display: none;
+    padding: 8px 0 4px;
+  }
+  .plw-success.plw-show {
+    display: block;
+  }
+  .plw-success-title {
+    margin: 0 0 8px;
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(24px, 4vw, 30px);
+    line-height: 1.2;
+    color: #0d0d0d;
+  }
+  .plw-success-copy {
+    margin: 0 auto;
+    max-width: 30ch;
+    font-size: 0.72rem;
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+    color: #555555;
+  }
+  .plw-success-copy strong {
+    font-weight: 600;
+    color: #0d0d0d;
+    word-break: break-all;
+  }
+
+  .plw-skip {
+    display: block;
+    margin: 22px auto 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.56rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0d0d0d;
+    opacity: 0.38;
+    padding: 4px;
+    transition: opacity 0.2s ease;
+  }
+  .plw-skip:hover {
+    opacity: 0.85;
+  }
+
+  @media (max-width: 480px) {
+    .plw-body {
+      padding: 38px 22px 28px;
+    }
+    .plw-perks {
+      gap: 12px;
+    }
+    .plw-perks li {
+      font-size: 0.52rem;
+      letter-spacing: 0.16em;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plw-scrim,
+    .plw-modal,
+    .plw-btn::before,
+    .plw-close {
+      transition: none !important;
+    }
+  }
+
+  /* Prevent background scroll while popup is open */
+  body.plw-lock {
+    overflow: hidden !important;
+  }
+</style>
+
+<div class="plw-scrim" id="plwScrim" aria-hidden="true"></div>
+
+<div class="plw-modal"
+     id="plwModal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="plwTitle"
+     aria-describedby="plwCopy">
+
+  <button class="plw-close" id="plwClose" aria-label="Close waitlist popup">&times;</button>
+
+  <div class="plw-body">
+
+    <!-- ── FORM STATE ── -->
+    <div id="plwFormWrap">
+      <p class="plw-eyebrow">Private Access</p>
+      <h2 class="plw-title" id="plwTitle">Join the Waitlist</h2>
+      <div class="plw-rule" aria-hidden="true"></div>
+      <p class="plw-copy" id="plwCopy">
+        Be the first to step inside when the atelier doors open.
+        Waitlist members receive first-look access, private previews
+        and VIP invitations before anyone else.
+      </p>
+
+      <form class="plw-form" id="plwForm" novalidate>
+        <input
+          class="plw-input"
+          id="plwEmail"
+          type="email"
+          name="email"
+          placeholder="Your email address"
+          autocomplete="email"
+          aria-label="Email address"
+          required
+        >
+        <button class="plw-btn" id="plwSubmit" type="submit">
+          <span>Request VIP Access</span>
+        </button>
+      </form>
+
+      <div class="plw-msg" id="plwMsg" role="status" aria-live="polite"></div>
+
+      <ul class="plw-perks" aria-label="Waitlist benefits">
+        <li>First Look</li>
+        <li>VIP Access</li>
+        <li>Private Previews</li>
+      </ul>
+
+      <button class="plw-skip" id="plwSkip" type="button">
+        Maybe later
+      </button>
+    </div>
+
+    <!-- ── SUCCESS STATE ── -->
+    <div class="plw-success" id="plwSuccess" aria-live="polite">
+      <p class="plw-eyebrow">You're on the list</p>
+      <h2 class="plw-success-title">Welcome to the Inner Circle</h2>
+      <div class="plw-rule" aria-hidden="true"></div>
+      <p class="plw-success-copy" id="plwSuccessMsg">
+        Thank you. You'll be the first to know when we go live.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PLUMELLE — WAITLIST POPUP (pre-launch · 2027)
+     Uses the SAME Apps Script backend as the newsletter form.
+     Paste just before </body> in home.html.
+     ══════════════════════════════════════════════════════════════════ -->
+<style>
+  .plw-scrim {
+    position: fixed; inset: 0; z-index: 999990;
+    background: rgba(10,10,10,0.72);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    opacity: 0; visibility: hidden;
+    transition: opacity .45s ease, visibility .45s ease;
+  }
+  .plw-scrim.plw-open { opacity: 1; visibility: visible; }
+
+  .plw-modal {
+    position: fixed; top: 50%; left: 50%; z-index: 999991;
+    transform: translate(-50%, -46%) scale(.96);
+    width: min(92vw, 470px); max-height: 90vh; overflow-y: auto;
+    background: #ffffff; color: #0d0d0d;
+    border: 1px solid #0d0d0d;
+    box-shadow: 0 40px 90px rgba(0,0,0,.45);
+    opacity: 0; visibility: hidden;
+    transition: opacity .45s ease, transform .45s cubic-bezier(.22,1,.36,1), visibility .45s;
+    font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .plw-modal.plw-open {
+    opacity: 1; visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .plw-modal::before {
+    content: ""; display: block; height: 3px; background: #0d0d0d;
+  }
+
+  .plw-close {
+    position: absolute; top: 14px; right: 16px;
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent; border: none; cursor: pointer;
+    font-size: 1.1rem; line-height: 1; color: #0d0d0d;
+    opacity: .45; padding: 0;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  .plw-close:hover { opacity: 1; transform: rotate(90deg); }
+
+  .plw-body { padding: 44px 36px 34px; text-align: center; }
+
+  .plw-eyebrow {
+    margin: 0 0 14px;
+    font-size: .6rem; font-weight: 600;
+    letter-spacing: .34em; text-transform: uppercase;
+    color: #0d0d0d; opacity: .55;
+  }
+  .plw-title {
+    margin: 0 0 8px;
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(27px, 4.8vw, 36px);
+    line-height: 1.14; letter-spacing: .01em; color: #0d0d0d;
+  }
+  .plw-rule {
+    width: 36px; height: 1px; margin: 18px auto 20px;
+    background: #0d0d0d; opacity: .65;
+  }
+  .plw-copy {
+    margin: 0 auto 26px; max-width: 34ch;
+    font-size: .78rem; font-weight: 400; line-height: 1.85;
+    letter-spacing: .02em; color: #555555;
+  }
+  .plw-copy strong { font-weight: 600; color: #0d0d0d; }
+
+  .plw-form {
+    display: flex; flex-direction: column; gap: 10px;
+    max-width: 340px; margin: 0 auto;
+  }
+  .plw-input {
+    width: 100%; padding: 14px 16px;
+    font-family: inherit; font-size: .78rem; letter-spacing: .04em;
+    color: #0d0d0d; background: #ffffff;
+    border: 1px solid #0d0d0d; border-radius: 0;
+    outline: none;
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .plw-input::placeholder {
+    color: #9a9a9a; font-style: italic; letter-spacing: .02em;
+  }
+  .plw-input:focus { background: #f7f7f7; }
+  .plw-input.plw-error { border-color: #b00020; background: #fff5f6; }
+
+  .plw-btn {
+    position: relative; width: 100%; padding: 15px 20px;
+    font-family: inherit; font-size: .66rem; font-weight: 600;
+    letter-spacing: .24em; text-transform: uppercase;
+    color: #ffffff; background: #0d0d0d;
+    border: 1px solid #0d0d0d; border-radius: 0;
+    cursor: pointer; overflow: hidden;
+    transition: color .3s ease;
+  }
+  .plw-btn::before {
+    content: ""; position: absolute; inset: 0;
+    background: #ffffff; transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    z-index: 1;
+  }
+  .plw-btn span { position: relative; z-index: 2; }
+  .plw-btn:hover::before { transform: scaleX(1); transform-origin: left; }
+  .plw-btn:hover { color: #0d0d0d; }
+  .plw-btn:disabled { cursor: wait; opacity: .6; }
+  .plw-btn:disabled::before { display: none; }
+
+  .plw-perks {
+    display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
+    margin: 24px 0 0; padding: 18px 0 0;
+    border-top: 1px solid rgba(13,13,13,.14);
+    list-style: none;
+  }
+  .plw-perks li {
+    font-size: .56rem; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: #0d0d0d; opacity: .6; white-space: nowrap;
+  }
+
+  .plw-msg {
+    display: none; margin: 14px auto 0; max-width: 34ch;
+    font-size: .62rem; font-weight: 500;
+    letter-spacing: .14em; text-transform: uppercase; line-height: 1.7;
+  }
+  .plw-msg.plw-show { display: block; }
+  .plw-msg.plw-err { color: #b00020; }
+
+  .plw-success { display: none; padding: 8px 0 4px; }
+  .plw-success.plw-show { display: block; }
+  .plw-success-title {
+    margin: 0 0 8px;
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-style: italic; font-weight: 500;
+    font-size: clamp(24px, 4vw, 30px); line-height: 1.2; color: #0d0d0d;
+  }
+  .plw-success-copy {
+    margin: 0 auto; max-width: 32ch;
+    font-size: .72rem; line-height: 1.8;
+    letter-spacing: .03em; color: #555555;
+  }
+  .plw-success-copy strong {
+    font-weight: 600; color: #0d0d0d; word-break: break-all;
+  }
+
+  .plw-skip {
+    display: block; margin: 22px auto 0;
+    background: none; border: none; cursor: pointer;
+    font-family: inherit; font-size: .56rem; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: #0d0d0d; opacity: .38; padding: 4px;
+    transition: opacity .2s ease;
+  }
+  .plw-skip:hover { opacity: .85; }
+
+  @media (max-width: 480px) {
+    .plw-body { padding: 38px 22px 28px; }
+    .plw-perks { gap: 12px; }
+    .plw-perks li { font-size: .52rem; letter-spacing: .16em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plw-scrim, .plw-modal, .plw-btn::before, .plw-close { transition: none !important; }
+  }
+  body.plw-lock { overflow: hidden !important; }
+</style>
+
+<div class="plw-scrim" id="plwScrim" aria-hidden="true"></div>
+
+<div class="plw-modal" id="plwModal" role="dialog" aria-modal="true"
+     aria-labelledby="plwTitle" aria-describedby="plwCopy">
+
+  <button class="plw-close" id="plwClose" aria-label="Close waitlist popup">&times;</button>
+
+  <div class="plw-body">
+
+    <div id="plwFormWrap">
+      <p class="plw-eyebrow">Opening 2027 · Private Access</p>
+      <h2 class="plw-title" id="plwTitle">Join the Waitlist</h2>
+      <div class="plw-rule" aria-hidden="true"></div>
+      <p class="plw-copy" id="plwCopy">
+        The atelier is not yet open. What you see today is a
+        <strong>preview</strong> — the full collection debuts in <strong>2027</strong>.
+        Waitlist members step inside first, with VIP early access,
+        private previews and launch-day priority before the public.
+      </p>
+
+      <form class="plw-form" id="plwForm" novalidate>
+        <input class="plw-input" id="plwEmail" type="email" name="email"
+               placeholder="Your email address"
+               autocomplete="email" aria-label="Email address" required>
+        <button class="plw-btn" id="plwSubmit" type="submit">
+          <span>Reserve VIP Access</span>
+        </button>
+      </form>
+
+      <div class="plw-msg" id="plwMsg" role="status" aria-live="polite"></div>
+
+      <ul class="plw-perks" aria-label="Waitlist benefits">
+        <li>2027 Early Access</li>
+        <li>VIP Invitations</li>
+        <li>Private Previews</li>
+      </ul>
+
+      <button class="plw-skip" id="plwSkip" type="button">Maybe later</button>
+    </div>
+
+    <div class="plw-success" id="plwSuccess" aria-live="polite">
+      <p class="plw-eyebrow">You're on the list</p>
+      <h2 class="plw-success-title">See You in 2027</h2>
+      <div class="plw-rule" aria-hidden="true"></div>
+      <p class="plw-success-copy" id="plwSuccessMsg">
+        Thank you. Your VIP invitation is reserved — we'll write to you
+        before the doors open.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ───────────── CONFIG ───────────── */
+  /* SAME backend as the newsletter form — no changes needed */
+  var PLW_BACKEND_URL   = 'https://script.google.com/macros/s/AKfycbwo0IIbug_4eO3LY-NUh84bOowpzxw84xP53xcZxLf0nvfRfhYiHEzS5Gk2tHFXfLQzlQ/exec';
+  var PLW_DELAY_MS      = 2500;
+  var PLW_EXIT_INTENT   = true;
+  var PLW_STORAGE_KEY   = 'plw_waitlist_dismissed_v1';
+  var PLW_SUPPRESS_DAYS = 7;
+
+  /* ───────────── ELEMENTS ───────────── */
+  var scrim      = document.getElementById('plwScrim');
+  var modal      = document.getElementById('plwModal');
+  var closeBtn   = document.getElementById('plwClose');
+  var skipBtn    = document.getElementById('plwSkip');
+  var formWrap   = document.getElementById('plwFormWrap');
+  var successBox = document.getElementById('plwSuccess');
+  var successMsg = document.getElementById('plwSuccessMsg');
+  var form       = document.getElementById('plwForm');
+  var emailInput = document.getElementById('plwEmail');
+  var submitBtn  = document.getElementById('plwSubmit');
+  var msgEl      = document.getElementById('plwMsg');
+
+  if (!modal || !scrim || !form) return;
+
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var isOpen = false;
+  var shown  = false;
+
+  /* ───────────── SUPPRESSION ───────────── */
+  function wasDismissed() {
+    try {
+      var raw = localStorage.getItem(PLW_STORAGE_KEY);
+      if (!raw) return false;
+      var ts = parseInt(raw, 10);
+      if (!ts || isNaN(ts)) return false;
+      return (Date.now() - ts) < PLW_SUPPRESS_DAYS * 86400000;
+    } catch (e) { return false; }
+  }
+  function markDismissed() {
+    try { localStorage.setItem(PLW_STORAGE_KEY, String(Date.now())); } catch (e) {}
+  }
+
+  /* ───────────── OPEN / CLOSE ───────────── */
+  function openPopup() {
+    if (isOpen || shown) return;
+    shown = true; isOpen = true;
+    scrim.classList.add('plw-open');
+    modal.classList.add('plw-open');
+    document.body.classList.add('plw-lock');
+    setTimeout(function () {
+      try { emailInput.focus({ preventScroll: true }); }
+      catch (e) { emailInput.focus(); }
+    }, 320);
+  }
+  function closePopup(userDismissed) {
+    if (!isOpen) return;
+    isOpen = false;
+    scrim.classList.remove('plw-open');
+    modal.classList.remove('plw-open');
+    document.body.classList.remove('plw-lock');
+    if (userDismissed) markDismissed();
+  }
+
+  closeBtn.addEventListener('click', function () { closePopup(true); });
+  skipBtn.addEventListener('click',  function () { closePopup(true); });
+  scrim.addEventListener('click',    function () { closePopup(true); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen) closePopup(true);
+  });
+
+  /* Focus trap */
+  modal.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab' || !isOpen) return;
+    var els = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    var list = Array.prototype.filter.call(els, function (el) {
+      return !el.disabled && el.offsetParent !== null;
+    });
+    if (!list.length) return;
+    var first = list[0], last = list[list.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* ───────────── FORM ───────────── */
+  function showMsg(text) {
+    msgEl.textContent = text;
+    msgEl.classList.add('plw-show', 'plw-err');
+  }
+  function clearMsg() {
+    msgEl.textContent = '';
+    msgEl.classList.remove('plw-show', 'plw-err');
+  }
+  emailInput.addEventListener('input', function () {
+    emailInput.classList.remove('plw-error');
+    clearMsg();
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    var email = (emailInput.value || '').trim();
+
+    if (!email) {
+      emailInput.classList.add('plw-error');
+      showMsg('Please enter your email address.');
+      emailInput.focus(); return;
+    }
+    if (!EMAIL_RE.test(email)) {
+      emailInput.classList.add('plw-error');
+      showMsg('Please enter a valid email address.');
+      emailInput.focus(); return;
+    }
+
+    var originalLabel = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Reserving\u2026</span>';
+    clearMsg();
+
+    try {
+      await fetch(PLW_BACKEND_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: 'waitlist-popup',
+          page: window.location.pathname,
+          timestamp: new Date().toISOString()
+        })
+      });
+
+      successMsg.innerHTML =
+        'Thank you. Your VIP invitation is reserved for <strong>' +
+        email.replace(/</g,'&lt;').replace(/>/g,'&gt;') +
+        '</strong>. We\u2019ll write to you before the doors open in 2027.';
+      formWrap.style.display = 'none';
+      successBox.classList.add('plw-show');
+
+      setTimeout(function () { if (isOpen) closePopup(false); }, 7000);
+
+    } catch (err) {
+      showMsg('Something went wrong. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalLabel;
+    }
+  });
+
+  /* ───────────── TRIGGERS ───────────── */
+  if (!wasDismissed()) {
+    setTimeout(function () { if (!shown) openPopup(); }, PLW_DELAY_MS);
+
+    if (PLW_EXIT_INTENT) {
+      document.addEventListener('mouseout', function (e) {
+        if (shown) return;
+        if (e.relatedTarget || e.toElement) return;
+        if (e.clientY > 12) return;
+        openPopup();
+      });
+    }
+
+    var scrolled = false;
+    window.addEventListener('scroll', function () {
+      if (scrolled || shown) return;
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      if (max <= 0) return;
+      if (window.pageYOffset / max > 0.4) { scrolled = true; openPopup(); }
+    }, { passive: true });
+  }
+
+  /* Manual API — call window.PlumelleWaitlist.open() anywhere */
+  window.PlumelleWaitlist = {
+    open: openPopup,
+    close: function () { closePopup(false); },
+    reset: function () {
+      try { localStorage.removeItem(PLW_STORAGE_KEY); } catch (e) {}
+      shown = false;
+    }
+  };
+})();
+</script>
+<!-- ══════════════════════════════════════════════════════════════════
+     END PLUMELLE WAITLIST POPUP
+     ══════════════════════════════════════════════════════════════════ -->
 <div class="toast" id="toast"></div>
 
 <!-- STORE HEADER -->
